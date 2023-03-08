@@ -5,41 +5,43 @@
         <!-- 側邊欄sidebar -->
         <div class="col-3">
           <div class="list-group">
-            <h2 class="fs-4 ps-7 mb-6">
+            <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item"
+                class="list-group-item sidebar-link"
                 @click.prevent="filterProduct('全部')"
-                :class="{ sidebarActive: active === '全部' }"
+                :class="{ 'sidebar-link-active': active === '全部' }"
               >
                 全部產品
               </a>
             </h2>
-            <h2 class="fs-4 ps-7 mb-6">
+            <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item border-0 bg-transparent"
+                class="list-group-item sidebar-link"
                 @click.prevent="filterProduct('維生素')"
                 @click="active = '維生素'"
-                :class="{ sidebarActive: active === '維生素' }"
+                :class="{ 'sidebar-link-active': active === '維生素' }"
               >
                 維生素
               </a>
             </h2>
-            <h2 class="fs-4 ps-7 mb-6">
+            <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item border-0 bg-transparent"
+                class="list-group-item sidebar-link"
                 @click.prevent="filterProduct('礦物質')"
+                :class="{ 'sidebar-link-active': active === '礦物質' }"
               >
                 礦物質
               </a>
             </h2>
-            <h2 class="fs-4 ps-7 mb-6">
+            <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item border-0 bg-transparent"
+                class="list-group-item sidebar-link"
                 @click.prevent="filterProduct('功能性補給')"
+                :class="{ 'sidebar-link-active': active === '功能性補給' }"
               >
                 功能性補給
               </a>
@@ -52,7 +54,8 @@
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <RouterLink
                 :to="`/product/${product.id}`"
-                class="card bg-card-bg border-0 h-100 pb-6 products-card"
+                class="card bg-card-bg border-0 h-100 pb-5 products-card"
+                @click.stop
               >
                 <div
                   style="height: 180px; background-size: cover; background-position: center"
@@ -74,30 +77,25 @@
                   <p class="card-text mb-4 h-100">
                     {{ product.simple }}
                   </p>
-                  <!-- <div class="input-group mb-10">
-                    <div class="form-check me-4">
-                      <input
-                        class="form-check-input"
-                        type="radio"
-                        name="shopType"
-                        id="day"
-                        checked
-                      />
-                      <label class="form-check-label fw-semibold" for="day"> 30天份自由配 </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="shopType" id="jar" />
-                      <label class="form-check-label fw-semibold" for="jar"> 150顆罐裝 </label>
-                    </div>
-                  </div> -->
-                  <div class="d-flex align-items-center justify-content-end">
-                    <p class="fw-semibold text-primary-200 me-2">{{ `$${product.price} /顆` }}</p>
-                    <button type="button" class="border-0 bg-transparent d-flex align-items-center">
-                      <span class="material-symbols-outlined text-primary-200 fs-7">
-                        shopping_cart
-                      </span>
-                    </button>
+
+                  <div class="d-flex align-items-center justify-content-end mb-1">
+                    <p class="fw-semibold text-primary-200">{{ `$${product.price} /顆` }}</p>
                   </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary text-white disabled"
+                    v-if="cart.carts.some((item) => item.product_id === product.id)"
+                  >
+                    已加入
+                  </button>
+                  <button
+                    type="button"
+                    v-else
+                    class="btn btn-primary-200 text-white"
+                    @click="addToCart(product.id, 30)"
+                  >
+                    加入購物車
+                  </button>
                 </div>
               </RouterLink>
             </div>
@@ -110,6 +108,9 @@
 
 <script>
 import { RouterLink } from 'vue-router'
+import { mapState, mapActions } from 'pinia'
+import { cartStore } from '../stores/cartStore'
+
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -117,7 +118,7 @@ export default {
       products: [],
       filterProducts: [],
       tempProduct: {},
-      active: ''
+      active: '全部'
     }
   },
   components: {
@@ -159,7 +160,12 @@ export default {
         console.log('篩選結果', filter)
         this.filterProducts = filter
       }
-    }
+    },
+    ...mapActions(cartStore, ['addToCart']),
+    ...mapActions(cartStore, ['getCart'])
+  },
+  computed: {
+    ...mapState(cartStore, ['cart'])
   },
   mounted() {
     this.getProducts()

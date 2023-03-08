@@ -18,16 +18,25 @@
           {{ `NT$${product.price} ` }}
           <span class="fs-4">/顆</span>
         </p>
-        <div class="mb-8">
-          <button type="button" class="btn btn-outline-secondary me-4 active">30日自由配</button>
-          <button type="button" class="btn btn-outline-secondary">150顆罐裝</button>
-        </div>
-        <button type="button" class="btn btn-primary-200 text-white" style="padding: 6px 74px">
+        <button
+          type="button"
+          class="btn btn-secondary text-white disabled py-2 px-19"
+          v-if="cart.carts.some((item) => item.product_id === product.id)"
+        >
+          已加入
+        </button>
+        <button
+          v-else
+          type="button"
+          class="btn btn-primary-200 text-white py-2 px-19"
+          @click="addToCart(product.id, qty)"
+        >
           加入購物車
         </button>
       </div>
     </div>
     <hr class="mb-6" />
+
     <ul class="list-unstyled d-flex justify-content-center mb-8">
       <!-- :class="{ tabActive: activeTab === 1 }" -->
       <li class="me-8 pb-2 px-3 border-bottom border-4 border-primary">
@@ -91,6 +100,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapState } from 'pinia'
+import { cartStore } from '../stores/cartStore'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -111,7 +122,11 @@ export default {
           console.log(err)
           alert(err.data.message)
         })
-    }
+    },
+    ...mapActions(cartStore, ['addToCart'])
+  },
+  computed: {
+    ...mapState(cartStore, ['cart'])
   },
   mounted() {
     this.getProduct()

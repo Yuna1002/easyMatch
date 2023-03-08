@@ -1,8 +1,14 @@
-.sidebar-active {
+.sidebar-link {
   background-color: transparent;
   border: transparent;
-  border-left: 3px solid $primary;
+  &-active {
+    padding-left: 13px;
+    border-left: 3px solid $primary;
+    color: $primary-200;
+    pointer-events: none;
+  }
 }
+
 .products-card {
   color: $dark;
   &:hover {
