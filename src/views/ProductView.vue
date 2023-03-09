@@ -20,7 +20,7 @@
         </p>
         <button
           type="button"
-          class="btn btn-secondary text-white disabled py-2 px-19"
+          class="btn btn-secondary text-white disabled py-2 px-20"
           v-if="cart.carts.some((item) => item.product_id === product.id)"
         >
           已加入

@@ -30,24 +30,20 @@ export const cartStore = defineStore('cart', {
       this.cartNum = this.cart.carts.length
     },
     addToCart(product_id, qty = 30) {
-      if (this.cart.carts.some((item) => item.product_id === product_id)) {
-        alert('購物車已有此品項，請前往查看')
-      } else {
-        const data = {
-          product_id,
-          qty
-        }
-        axios
-          .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
-          .then((res) => {
-            console.log('加入購物車', res)
-            alert(res.data.message)
-            this.getCart()
-          })
-          .catch((err) => {
-            console.log(err)
-          })
+      const data = {
+        product_id,
+        qty
       }
+      axios
+        .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
+        .then((res) => {
+          console.log('加入購物車', res)
+          alert(res.data.message)
+          this.getCart()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     delCart(id) {
       axios

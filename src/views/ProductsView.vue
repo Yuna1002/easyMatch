@@ -52,10 +52,10 @@
         <div class="col-9">
           <div class="row">
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
-              <RouterLink
-                :to="`/product/${product.id}`"
+              <a
+                href=""
                 class="card bg-card-bg border-0 h-100 pb-5 products-card"
-                @click.stop
+                @click.prevent="handleClick($event, product.id)"
               >
                 <div
                   style="height: 180px; background-size: cover; background-position: center"
@@ -92,24 +92,25 @@
                     type="button"
                     v-else
                     class="btn btn-primary-200 text-white"
-                    @click="addToCart(product.id, 30)"
+                    @click.prevent="addToCart(product.id)"
                   >
                     加入購物車
                   </button>
                 </div>
-              </RouterLink>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!-- <SuccessToast ref="SuccessToast"></SuccessToast> -->
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
+//import SuccessToast from '../components/SuccessToast.vue'
 
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
@@ -122,7 +123,7 @@ export default {
     }
   },
   components: {
-    RouterLink
+    //SuccessToast
   },
   methods: {
     getProducts() {
@@ -132,20 +133,6 @@ export default {
           console.log('產品', res.data.products)
           this.products = res.data.products
           this.filterProducts = this.products
-        })
-        .catch((err) => {
-          alert(err.data.message)
-        })
-    },
-    addToCart(id) {
-      const data = {
-        product_id: id,
-        qty: 1
-      }
-      this.$http
-        .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          alert(res.data.message)
         })
         .catch((err) => {
           alert(err.data.message)
@@ -161,7 +148,33 @@ export default {
         this.filterProducts = filter
       }
     },
-    ...mapActions(cartStore, ['addToCart']),
+    handleClick(e, id) {
+      console.log(e)
+      if (e.target.nodeName === 'BUTTON') {
+        this.addToCart(id)
+      } else {
+        this.$router.push(`/product/${id}`)
+      }
+    },
+    addToCart(product_id, qty = 30) {
+      const data = {
+        product_id,
+        qty
+      }
+      this.$http
+        .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
+        .then((res) => {
+          console.log('加入購物車', res)
+          // if (res.data.success) {
+          //   this.$refs.SuccessToast.show()
+          // }
+          alert(res.data.message)
+          this.getCart()
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     ...mapActions(cartStore, ['getCart'])
   },
   computed: {
@@ -169,6 +182,7 @@ export default {
   },
   mounted() {
     this.getProducts()
+    // this.$refs.SuccessToast.hide()
   }
 }
 </script>
