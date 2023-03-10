@@ -50,7 +50,7 @@
         </div>
         <!-- 產品列表 -->
         <div class="col-9">
-          <div class="row">
+          <div class="row vl-parent" ref="productsContainer">
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <a
                 href=""
@@ -93,6 +93,7 @@
                     v-else
                     class="btn btn-primary-200 text-white"
                     @click.prevent="addToCart(product.id)"
+                    :disabled="loadingItem === product.id"
                   >
                     加入購物車
                   </button>
@@ -119,7 +120,9 @@ export default {
       products: [],
       filterProducts: [],
       tempProduct: {},
-      active: '全部'
+      active: '全部',
+      fullPage: false,
+      loadingItem: '' //存id,當事件有此id時 disabled
     }
   },
   components: {
@@ -127,12 +130,16 @@ export default {
   },
   methods: {
     getProducts() {
+      const loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer
+      })
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
           console.log('產品', res.data.products)
           this.products = res.data.products
           this.filterProducts = this.products
+          loader.hide()
         })
         .catch((err) => {
           alert(err.data.message)
