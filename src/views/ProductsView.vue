@@ -164,6 +164,7 @@ export default {
       }
     },
     addToCart(product_id, qty = 30) {
+      this.loadingItem = product_id
       const data = {
         product_id,
         qty
