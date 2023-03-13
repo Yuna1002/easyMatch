@@ -131,12 +131,12 @@ export default {
   methods: {
     getProducts() {
       const loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.formContainer
+        container: this.fullPage ? null : this.$refs.productsContainer
       })
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
-          console.log('產品', res.data.products)
+          //console.log('產品', res.data.products)
           this.products = res.data.products
           this.filterProducts = this.products
           loader.hide()
@@ -151,7 +151,6 @@ export default {
         this.getProducts()
       } else {
         const filter = this.products.filter((product) => product.category === category)
-        console.log('篩選結果', filter)
         this.filterProducts = filter
       }
     },

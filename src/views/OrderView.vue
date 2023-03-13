@@ -110,6 +110,7 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
+import Swal from 'sweetalert2'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -129,25 +130,18 @@ export default {
     ...mapState(cartStore, ['cart'])
   },
   methods: {
-    // delAllCart() {
-    //   this.$http
-    //     .delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/carts`)
-    //     .then((res) => {
-    //       alert(res.data.message)
-    //       this.getCarts()
-    //     })
-    //     .catch((err) => {
-    //       alert(err.data.message)
-    //     })
-    // },
     submitOrder() {
       const data = this.form
       this.$http
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/order`, { data })
-        .then((res) => {
-          alert(res.data.message)
+        .then(() => {
+          Swal.fire({ 
+          icon: 'success',
+          title: '訂單建立成功', 
+          timer: 2000, //如果不要確認按鈕，1.5秒後自動關閉
+          confirmButtonColor: '#46afa2'
+          })
           this.$refs.form.resetForm()
-          //this.delAllCart()
           this.getCart()
         })
         .catch((err) => {
