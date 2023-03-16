@@ -1,10 +1,15 @@
 @import 'bootstrap/scss/functions';
 @import './variables';
-// @import 'bootstrap/scss/utilities';
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import 'bootstrap/scss/utilities';
+@import './utilities';
+@import "bootstrap/scss/utilities/api";
 @import 'bootstrap/scss/bootstrap';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Josefin+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&family=Josefin+Sans:wght@700&family=Noto+Sans+TC:wght@700&display=swap');
 @import './base';
 @import './mixin';
-@import './utilities';
+@import './index';
+@import './products';
 

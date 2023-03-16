@@ -1,6 +1,8 @@
 <template>
+<div aria-live="polite" aria-atomic="true" class="bg-dark  bd-example-toasts toast-position ">
+  <div class="toast-container  p-3 position-absoluate top-0 end-0" id="toastPlacement">
   <div
-    class="toast align-items-center text-white bg-success border-0"
+    class="toast align-items-center text-white bg-primary-200 border-0  "
     role="alert"
     aria-live="assertive"
     aria-atomic="true"
@@ -16,6 +18,8 @@
       ></button>
     </div>
   </div>
+</div>
+</div>
 </template>
 <script>
 import Toast from 'bootstrap/js/dist/toast'
@@ -34,9 +38,8 @@ export default {
     }
   },
   mounted() {
-    this.successToast = [].slice.call(this.successToast).map(function (toastEl) {
-      return new Toast(toastEl)
-    })
+    this.successToast = new Toast(this.$refs.successToast,{delay:1000})
+    
   }
 }
 </script>

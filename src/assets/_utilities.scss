@@ -1,40 +1,25 @@
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-size":
+      map-merge(
+        map-get($utilities, "font-size"),
+        (
+          responsive: true,
+          rfs: false,
+        )
+      ),
+  )
+);
 
-.banner{
-  background-color:$primary ;
-  background-image: url(../assets/images/bg_desktop.png);
-  background-size: cover;
-  height: 100vh;
-  background-position: center;
-  // background-attachment:fixed; 
 
-}
-.h1-fs{
-  font-size: 3.5rem;
-  @include md{
-    font-size: 6rem;
-  }
 
-}
-.sidebar-link {
-  background-color: transparent;
-  border: transparent;
-  &-active {
-    padding-left: 13px;
-    border-left: 3px solid $primary;
-    color: $primary-200;
-    pointer-events: none;
-  }
-}
-
-.products-card {
-  color: $dark;
-  &:hover {
-    color: $dark;
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-  }
-}
 
 .tab-active {
   border-bottom: 4px solid $primary;
 }
+// .nav-position{
+//   position: fixed;
+//   top: 56px;
+//   z-index: 1030;
+// }

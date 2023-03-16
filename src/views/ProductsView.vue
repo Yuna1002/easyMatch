@@ -1,10 +1,12 @@
 <template>
   <div class="bg-tertiary-100">
+    <SuccessToast ref="SuccessToast"   ></SuccessToast>
     <div class="container pt-12">
+      
       <div class="row">
         <!-- 側邊欄sidebar -->
-        <div class="col-3">
-          <div class="list-group">
+        <div class="col-3 ">
+          <div class="list-group sidebar-position">
             <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
@@ -49,7 +51,9 @@
           </div>
         </div>
         <!-- 產品列表 -->
+
         <div class="col-9">
+          
           <div class="row vl-parent" ref="productsContainer">
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <a
@@ -92,9 +96,10 @@
                     type="button"
                     v-else
                     class="btn btn-primary-200 text-white"
-                    @click.prevent="addToCart(product.id)"
+                    
                     :disabled="loadingItem === product.id"
                   >
+          
                     加入購物車
                   </button>
                 </div>
@@ -105,13 +110,15 @@
       </div>
     </div>
   </div>
-  <!-- <SuccessToast ref="SuccessToast"></SuccessToast> -->
+
+  <!-- <HomeView :products="products"></HomeView> -->
 </template>
 
 <script>
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
-//import SuccessToast from '../components/SuccessToast.vue'
+import SuccessToast from '../components/SuccessToast.vue'
+// import HomeView from './HomeView.vue'
 
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
@@ -126,7 +133,8 @@ export default {
     }
   },
   components: {
-    //SuccessToast
+    SuccessToast
+    // HomeView
   },
   methods: {
     getProducts() {
@@ -155,7 +163,7 @@ export default {
       }
     },
     handleClick(e, id) {
-      console.log(e)
+      //console.log(e)
       if (e.target.nodeName === 'BUTTON') {
         this.addToCart(id)
       } else {
@@ -172,10 +180,10 @@ export default {
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
         .then((res) => {
           console.log('加入購物車', res)
-          // if (res.data.success) {
-          //   this.$refs.SuccessToast.show()
-          // }
-          alert(res.data.message)
+          if (res.data.success===true) {
+            this.$refs.SuccessToast.show()
+          }
+          //alert(res.data.message)
           this.getCart()
         })
         .catch((err) => {
@@ -189,7 +197,8 @@ export default {
   },
   mounted() {
     this.getProducts()
-    // this.$refs.SuccessToast.hide()
+    
+    
   }
 }
 </script>

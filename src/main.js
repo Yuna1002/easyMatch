@@ -8,7 +8,8 @@ import App from './App.vue'
 import router from './router'
 
 import './assets/all.scss'
-//import 'bootstrap'
+import 'bootstrap';
+import 'animate.css';
 
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import AllRules from '@vee-validate/rules'

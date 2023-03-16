@@ -1,0 +1,29 @@
+.sidebar-link {
+    background-color: transparent;
+    border: transparent;
+    &-active {
+      padding-left: 13px;
+      border-left: 3px solid $primary;
+      color: $primary-200;
+      pointer-events: none;
+    }
+  }
+.sidebar-position{
+  position: sticky;
+  top:104px;
+  z-index: 1;
+}
+  
+.products-card {
+  color: $dark;
+  &:hover {
+    color: $dark;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+}
+.toast-position{
+  position: sticky;
+  top:56px;
+  z-index: 1;
+}

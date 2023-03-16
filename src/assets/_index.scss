@@ -1,0 +1,36 @@
+.banner{
+    background-color:$primary ;
+    background-image: url(../assets/images/bg_mobile.png);
+    background-size: cover;
+    height: calc(100vh - 56px);
+    background-position: center;
+    @include md{
+        background-image: url(../assets/images/bg_desktop.png);
+    }
+  
+  }
+.bg-3{
+    background-color:$tertiary-100 ;
+    background-image: url(../assets/images/bg.png);
+    background-attachment: fixed;
+}
+.btn-hover{
+    &:hover{
+        box-shadow: 0 8px 1px $primary-400;
+    }
+}
+.my-element {
+    animation: shakeY; /* referring directly to the animation's @keyframe declaration */
+    --animate-duration: 8s; /* don't forget to set a duration! */
+  }
+
+.mobile-element{
+    animation-name:upDown;
+    animation-duration:6s;  
+    animation-iteration-count: infinite;
+}
+@keyframes upDown {
+    0%   {left:50%; top:100%;}
+    50%  {left:50%; top:70%;}
+    100% {left:50%; top:100%;}
+  } 

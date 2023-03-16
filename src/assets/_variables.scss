@@ -300,6 +300,8 @@ $cyans: (
 // scss-docs-start theme-color-variables
 $primary: #70d0c4 !default; // $blue !default;
 $primary-200: #46afa2 !default; //add
+$primary-300: #A6F2A4 !default; //add
+$primary-400: #79F2A1 !default; //add
 $secondary: $gray-600 !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -311,12 +313,15 @@ $white: $white !default;
 $tertiary: #ffeea3 !default;
 $tertiary-100: #fffbf4 !default;
 $card-bg: #f5f5f5 !default;
+$black:$black !default; //add
 // scss-docs-end theme-color-variables
 
 // scss-docs-start theme-colors-map
 $theme-colors: (
   'primary': $primary,
   'primary-200': $primary-200,
+  'primary-300':$primary-300,
+  'primary-400':$primary-400,
   'secondary': $secondary,
   'success': $success,
   'info': $info,
@@ -327,6 +332,7 @@ $theme-colors: (
   'tertiary': $tertiary,
   'tertiary-100': $tertiary-100,
   'white': $white,
+  'black':$black,
   'card-bg': $card-bg
 ) !default;
 // scss-docs-end theme-colors-map
@@ -399,8 +405,13 @@ $spacers: (
   10: $spacer * 2.5,
   11: $spacer * 2.75,
   12: $spacer * 3,
+  15: $spacer * 3.75,
+  16: $spacer * 4,
   19: $spacer * 4.75,
-  20: $spacer * 5
+  20: $spacer * 5,
+  25: $spacer * 6.25,
+  30: $spacer * 7.5,
+  40: $spacer * 10
 ) !default;
 // scss-docs-end spacer-variables-maps
 
@@ -616,7 +627,10 @@ $font-sizes: (
   8: $font-size-base * 2,
   9: $font-size-base * 2.25,
   10: $font-size-base * 2.5,
-  12: $font-size-base * 3
+  12: $font-size-base * 3,
+  14: $font-size-base * 3.5,
+  md: $font-size-base * 4.75,
+  lg:$font-size-base * 6
 ) !default;
 // scss-docs-end font-sizes
 

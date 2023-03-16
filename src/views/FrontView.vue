@@ -1,6 +1,6 @@
 <template>
   <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #71dacc">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
       <div class="container">
         <a class="navbar-brand" href="#">
           <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top" /> </a
@@ -13,12 +13,14 @@
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          @click="toggleNav"
+          
         >
+
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav" :class="{show:openNav===true}">
-          <ul class="navbar-nav ms-auto d-flex align-items-center ">
+        <div class="collapse navbar-collapse " id="navbarNav" >
+
+          <ul class="navbar-nav ms-auto d-flex align-items-center " >
             <li class="nav-item me-lg-9">
               <RouterLink to="/" class="nav-link">首頁 </RouterLink>
             </li>
@@ -73,20 +75,20 @@ export default {
     windowWidth(){
       if(this.windowWidth>991){
         this.openNav=false
+      }else{
+        this.openNav=true
       }
     }
   },
   methods: {
     ...mapActions(cartStore, ['getCart']),
-    toggleNav(){
-      if(this.openNav===false){
-        this.openNav=true
-      }else{
-        this.openNav=false
-      }
-    },
     onResize() {
       this.windowWidth = window.innerWidth
+      if(this.windowWidth>991){
+        this.openNav=false
+      }else{
+        this.openNav=true
+      }
     }
 
   },
@@ -95,6 +97,7 @@ export default {
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     })
+    this.onResize();
     
   },
   beforeUnmount(){
