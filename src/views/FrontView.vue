@@ -50,7 +50,10 @@
     </nav>
   </header>
   <RouterView></RouterView>
-  <footer></footer>
+  <footer class="bg-primary-200 py-15">
+  <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
+  <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
+</footer>
 </template>
 <script>
 import { RouterView, RouterLink } from 'vue-router'

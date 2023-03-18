@@ -1,7 +1,7 @@
 <template>
   <div class="bg-tertiary-100">
     <SuccessToast ref="SuccessToast"   ></SuccessToast>
-    <div class="container pt-12">
+    <div class="container pt-12 pb-40">
       
       <div class="row">
         <!-- 側邊欄sidebar -->
@@ -111,14 +111,14 @@
     </div>
   </div>
 
-  <!-- <HomeView :products="products"></HomeView> -->
+
 </template>
 
 <script>
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import SuccessToast from '../components/SuccessToast.vue'
-// import HomeView from './HomeView.vue'
+
 
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
@@ -133,8 +133,8 @@ export default {
     }
   },
   components: {
-    SuccessToast
-    // HomeView
+    SuccessToast,
+
   },
   methods: {
     getProducts() {
@@ -157,6 +157,7 @@ export default {
       this.active = category
       if (category === '全部') {
         this.getProducts()
+        this.filterProducts = this.products
       } else {
         const filter = this.products.filter((product) => product.category === category)
         this.filterProducts = filter
@@ -179,7 +180,7 @@ export default {
       this.$http
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
         .then((res) => {
-          console.log('加入購物車', res)
+          //console.log('加入購物車', res)
           if (res.data.success===true) {
             this.$refs.SuccessToast.show()
           }
@@ -190,14 +191,14 @@ export default {
           console.log(err)
         })
     },
-    ...mapActions(cartStore, ['getCart'])
+    ...mapActions(cartStore, ['getCart']),
+   // ...mapActions(cartStore, ['addToCart']),
   },
   computed: {
-    ...mapState(cartStore, ['cart'])
+    ...mapState(cartStore, ['cart']),
   },
   mounted() {
-    this.getProducts()
-    
+   this.getProducts();
     
   }
 }

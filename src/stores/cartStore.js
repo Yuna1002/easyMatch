@@ -37,8 +37,11 @@ export const cartStore = defineStore('cart', {
       axios
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
         .then((res) => {
-          console.log('加入購物車', res)
-          alert(res.data.message)
+          //console.log('加入購物車', res)
+          //alert(res.data.message)
+          if (res.data.success===true) {
+            this.$refs.SuccessToast.show()
+          }
           this.getCart()
         })
         .catch((err) => {

@@ -1,6 +1,6 @@
 <template>
   <div class="bg-tertiary-100">
-    <div class="container pt-12 pb-12">
+    <div class="container pt-12 pb-40">
       <div class="row justify-content-center">
         <div class="col-10">
           <div class="bg-card-bg px-8 py-12 mb-8">
