@@ -1,12 +1,12 @@
 <template>
   <div class="bg-tertiary-100">
-    <SuccessToast ref="SuccessToast"   ></SuccessToast>
+    <SuccessToast></SuccessToast>
     <div class="container pt-12 pb-40">
       
       <div class="row">
         <!-- 側邊欄sidebar -->
-        <div class="col-3 ">
-          <div class="list-group sidebar-position">
+        <div class="col-md-3 sidebar-position">
+          <div class="list-group  flex-row flex-md-column pt-4 bg-tertiary-100 rounded-0  sidebar-position">
             <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
@@ -52,9 +52,8 @@
         </div>
         <!-- 產品列表 -->
 
-        <div class="col-9">
-          
-          <div class="row vl-parent" ref="productsContainer">
+        <div class="col-md-9">          
+          <div class="row vl-parent " ref="productsContainer">
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <a
                 href=""
@@ -118,8 +117,6 @@
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import SuccessToast from '../components/SuccessToast.vue'
-
-
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -144,7 +141,6 @@ export default {
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
-          //console.log('產品', res.data.products)
           this.products = res.data.products
           this.filterProducts = this.products
           loader.hide()
@@ -171,28 +167,8 @@ export default {
         this.$router.push(`/product/${id}`)
       }
     },
-    addToCart(product_id, qty = 30) {
-      this.loadingItem = product_id
-      const data = {
-        product_id,
-        qty
-      }
-      this.$http
-        .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          //console.log('加入購物車', res)
-          if (res.data.success===true) {
-            this.$refs.SuccessToast.show()
-          }
-          //alert(res.data.message)
-          this.getCart()
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     ...mapActions(cartStore, ['getCart']),
-   // ...mapActions(cartStore, ['addToCart']),
+   ...mapActions(cartStore, ['addToCart']),
   },
   computed: {
     ...mapState(cartStore, ['cart']),

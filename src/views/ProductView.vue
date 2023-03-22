@@ -1,10 +1,17 @@
 <template>
-  <div class="container pt-12">
+  <div class="container pt-12" ref="productsContainer">
     <div class="row pb-12">
       <div class="col-md-6">
         <img class="img-fluid" :src="product.imageUrl" alt="" />
       </div>
       <div class="col-md-6">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><RouterLink to="/">首頁</RouterLink></li>
+          <li class="breadcrumb-item"><RouterLink to="/products">產品列表</RouterLink></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+        </ol>
+      </nav>
         <div class="d-flex align-items-center mb-6">
           <h1 class="h2 fw-bold mb-0">
             {{ product.title }}
@@ -102,21 +109,30 @@
 <script>
 import { mapActions, mapState } from 'pinia'
 import { cartStore } from '../stores/cartStore'
+import { RouterLink } from 'vue-router'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
     return {
       product: {},
-      activeTab: 1
+      activeTab: 1,
+      fullPage: true,
     }
+  },
+  components:{
+    RouterLink
   },
   methods: {
     getProduct() {
       const { id } = this.$route.params
+      const loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.productsContainer
+      })
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/product/${id}`)
         .then((res) => {
           this.product = res.data.product
+          loader.hide()
         })
         .catch((err) => {
           console.log(err)

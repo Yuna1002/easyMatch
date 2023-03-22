@@ -15,7 +15,10 @@
                 </tr>
               </thead>
               <tbody>
-                <template v-if="cart.carts">
+                <tr v-if="!cart.carts.length">
+                  <td class="text-center ps-9" colspan="3">購物車尚未有產品</td>
+                </tr>
+                <template v-else>
                   <tr v-for="item in cart.carts" :key="item.id">
                     <td class="d-md-flex align-items-md-center">
                       <div class="me-8 d-none d-md-block" style="width: 150px">
@@ -60,13 +63,12 @@
             </div>
           </div>
           <div class="d-flex justify-content-end">
-            <RouterLink
-              to="/order"
-              type="button"
+            <a  
               class="btn btn-primary-200 text-white ps-8 pe-6 py-2 d-flex align-items-center"
+              @click="checkCart"
             >
               前往結帳<span class="material-symbols-outlined fw-semibold"> chevron_right </span>
-            </RouterLink>
+            </a>
           </div>
         </div>
       </div>
@@ -75,18 +77,33 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
+import Swal from 'sweetalert2'
 export default {
-  components: {
-    RouterLink
-  },
   computed: {
     ...mapState(cartStore, ['cart'])
   },
   methods: {
-    ...mapActions(cartStore, ['delCart'])
+    ...mapActions(cartStore, ['delCart']),
+    checkCart(){
+      if(!this.cart.carts.length){
+        Swal.fire({
+            icon: 'warning',
+            title:'購物車尚無資料',
+            confirmButtonText: '前往購物',
+            confirmButtonColor: '#46afa2'                        
+          })
+          .then((result) => {
+            if (result.isConfirmed){
+              this.$router.push('/products')
+            }
+          })
+
+      }else{
+        this.$router.push('/order')
+      }
+    }
   }
 }
 </script>

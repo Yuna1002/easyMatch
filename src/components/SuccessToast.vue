@@ -23,6 +23,8 @@
 </template>
 <script>
 import Toast from 'bootstrap/js/dist/toast'
+import { mapState} from 'pinia'
+import { cartStore } from '../stores/cartStore'
 export default {
   data() {
     return {
@@ -30,6 +32,7 @@ export default {
     }
   },
   methods: {
+   
     hide() {
       this.successToast.hide()
     },
@@ -37,6 +40,17 @@ export default {
       this.successToast.show()
     }
   },
+  computed: {
+    ...mapState(cartStore, ['openToast']),
+  },
+  watch:{
+      openToast(){
+        if(this.openToast===true){
+          this.show();
+          
+        }
+      }
+    },
   mounted() {
     this.successToast = new Toast(this.$refs.successToast,{delay:1000})
     

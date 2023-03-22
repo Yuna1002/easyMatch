@@ -1,10 +1,10 @@
 <template>
   <header class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="" alt="" width="30" height="24" class="d-inline-block align-text-top" /> </a
-        ><a class="navbar-brand " href="#">EASY MATCH</a>
+      <div class="container ">
+        <a class="navbar-brand " href="/">
+          <img src="../assets/images/logo-01.png" alt=""  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
+        ><a class="navbar-brand" href="#" style="font-family:Josefin Sans">EASY MATCH</a>
         <button
           class="navbar-toggler"
           type="button"

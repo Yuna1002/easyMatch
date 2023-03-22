@@ -2,16 +2,27 @@
     background-color: transparent;
     border: transparent;
     &-active {
-      padding-left: 13px;
-      border-left: 3px solid $primary;
+      border-bottom: 3px solid $primary;
       color: $primary-200;
       pointer-events: none;
+      @include md{
+      padding-left: 13px;
+      border-left: 3px solid $primary;
+      border-bottom: none;
+      }
     }
   }
 .sidebar-position{
   position: sticky;
-  top:104px;
-  z-index: 1;
+  top: 68.5px;
+  z-index: 1020;
+  
+  @include md{
+    position: sticky;
+    top:100px;
+    z-index: 0;
+    
+  }
 }
   
 .products-card {

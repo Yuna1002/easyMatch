@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 
-//export default
-//目前使用命名
+
 
 export const cartStore = defineStore('cart', {
   state: () => {
     return {
       cart: { group: 1 }, //carts,total,finalTotal(優惠券折扣)
-      cartNum: 0
+      cartNum: 0,
+      openToast:false
     }
   },
   actions: {
@@ -20,7 +21,8 @@ export const cartStore = defineStore('cart', {
           this.cart = res.data.data
           this.cart.group = 1
           this.calcCartNum()
-          console.log('購物車資料', this.cart)
+          //console.log('購物車資料', this.cart)
+          this.openToast=false
         })
         .catch((err) => {
           console.log(err)
@@ -40,9 +42,11 @@ export const cartStore = defineStore('cart', {
           //console.log('加入購物車', res)
           //alert(res.data.message)
           if (res.data.success===true) {
-            this.$refs.SuccessToast.show()
+            //this.$refs.SuccessToast.show()
+            this.openToast=true
           }
           this.getCart()
+          
         })
         .catch((err) => {
           console.log(err)
@@ -52,7 +56,14 @@ export const cartStore = defineStore('cart', {
       axios
         .delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${id}`)
         .then((res) => {
-          alert(res.data.message)
+          Swal.fire({
+            icon: 'success',
+            toast: true,
+            position: 'top',
+            showConfirmButton: false,
+            title:res.data.message,
+            timer: 1500,
+          });
           this.getCart()
         })
         .catch((err) => {
