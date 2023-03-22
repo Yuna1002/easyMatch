@@ -20,11 +20,11 @@ git checkout -B main
 git add -A
 git commit -m 'deploy'
 
-# if you are deploying to https://Yuna1002.github.io
-# git push -f git@github.com:Yuna1002/Yuna1002.github.io.git main
+# if you are deploying to https://yuna1002.github.io
+# git push -f git@github.com:yuna1002/yuna1002.github.io.git main
 
-# if you are deploying to https://Yuna1002.github.io/easyMatch
-# git push -f git@github.com:Yuna1002/easyMatch.git main:gh-pages
+# if you are deploying to https://yuna1002.github.io/easyMatch
+# git push -f git@github.com:yuna1002/easyMatch.git main:gh-pages
 git push -f https://github.com/Yuna1002/easyMatch.git main:gh-pages
 
 cd -

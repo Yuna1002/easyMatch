@@ -2,7 +2,7 @@
   <SuccessToast></SuccessToast>
   <div class="banner d-flex justify-content-center align-items-center position-relative  overflow-hidden ">    
     <div class="d-flex flex-column flex-md-row justify-content-md-center align-items-md-center  ">
-      <img class="img-fluid me-md-19 d-none d-md-block animate__animated animate__shakeY animate__infinite my-element " src="../assets/images/Left pill.svg" alt="">
+      <img class="img-fluid me-md-19 d-none d-md-block animate__animated animate__shakeY animate__infinite my-element " src="../assets/images/Left_pill.svg" alt="">
       <div class="d-flex flex-column align-items-center" >
         <h1 class="text-white text-center fs-lg-lg fs-md-md fs-14 mb-4 " style="font-family:Josefin Sans" data-aos="fade-down">EASY<br>MATCH</h1>
         <p class="fs-lg-7 fs-5 text-white text-nowrap mb-10 mb-md-16" style="font-family:Noto Sans TC" data-aos="fade-right">\  一小包 您要的健康 一次搞定  /</p>
@@ -10,9 +10,9 @@
 arrow_forward
 </span>立即前往</RouterLink> 
       </div>
-      <img class="img-fluid ms-md-19 d-none d-md-block animate__animated animate__shakeY animate__infinite my-element" src="../assets/images/RIght pill.svg" alt="">
+      <img class="img-fluid ms-md-19 d-none d-md-block animate__animated animate__shakeY animate__infinite my-element" src="../assets/images/RIght_pill.svg" alt="">
       <!-- 手機版的藥丸 -->
-      <img class=" d-md-none mobile-element" src="../assets/images/RIght pill.svg" alt="">
+      <img class=" d-md-none mobile-element" src="../assets/images/RIght_pill.svg" alt="">
     </div>
     
   </div>
@@ -23,28 +23,28 @@ arrow_forward
       <div class="row">
         <div class="col-xl-3 col-md-6 mb-15">
           <div class="bg-card-bg rounded-4 mb-6" data-aos="fade-up">
-            <img class="img-fluid" src="../assets/images/工作區域 2@1.png" alt="">  
+            <img class="img-fluid" src="../assets/images/section2_1.png" alt="">  
           </div>
           <h3 class="mb-6 fw-bold text-center fs-5 fs-lg-6">自由配</h3>
           <p class="fs-lg-5 fs-4 text-center"> 多種選擇 任你配</p>
         </div>
         <div class="col-xl-3 col-md-6 mb-15" >
           <div class="bg-card-bg rounded-4 mb-6" data-aos="fade-up" >
-            <img class="img-fluid" src="../assets/images/工作區域 2@2.png" alt="">  
+            <img class="img-fluid" src="../assets/images/section2_2.png" alt="">  
           </div>
           <h3 class="mb-6 fw-bold text-center fs-5 fs-lg-6">小包裝</h3>
           <p class="fs-lg-5 fs-4 text-center text-nowrap"> 30天份一次一包 攜帶方便</p>
         </div>
         <div class="col-xl-3 col-md-6 mb-15">
           <div class="bg-card-bg rounded-4 mb-6" data-aos="fade-up" >
-            <img class="img-fluid" src="../assets/images/工作區域 2@3.png" alt="">  
+            <img class="img-fluid" src="../assets/images/section2_3.png" alt="">  
           </div>
           <h3 class="mb-6 fw-bold text-center fs-5 fs-lg-6">客製化</h3>
           <p class="fs-lg-5 fs-4 text-center"> 依照早晚分開包裝</p>
         </div>
         <div class="col-xl-3 col-md-6">
           <div class="bg-card-bg rounded-4 mb-6" data-aos="fade-up" >
-            <img class="img-fluid" src="../assets/images/工作區域 2@4.png" alt="">  
+            <img class="img-fluid" src="../assets/images/section2_4.png" alt="">  
           </div>
           <h3 class="mb-6 fw-bold text-center fs-5 fs-lg-6">專業問答</h3>
           <p class="fs-lg-5 fs-4 text-center"> 提供專業諮詢服務</p>
@@ -64,7 +64,7 @@ arrow_forward
             <!-- 步驟一 -->
             <div class="col-md-5 d-md-block" :class="{'d-none':move==='right','animate__animated':move==='left','animate__slideInLeft':move==='left'}" >
               <div class="bg-primary-300 rounded-4 mb-6 position-relative " data-aos="fade-right">
-                <img class="img-fluid" src="../assets/images/工作區域 3@1.png" alt=""> 
+                <img class="img-fluid" src="../assets/images/section3_1.png" alt=""> 
                 <!-- 箭頭圖示 -->
                 <button type="button" class="border-0 bg-transparent arrow-right d-md-none " @click="move='right'">
                   <div class="bg-black rounded-circle d-flex justify-content-center align-items-center shadow " style="width:40px ; height:40px;">
@@ -91,7 +91,7 @@ arrow_forward
             <div class="col-md-5  d-md-block" :class="{'d-none':move==='left','animate__animated':move==='right','animate__slideInRight':move==='right'}" >
     
               <div class="bg-primary rounded-4 mb-6 position-relative" data-aos="fade-left">
-                <img class="img-fluid" src="../assets/images/工作區域 3@2.png" alt="">
+                <img class="img-fluid" src="../assets/images/section3_2.png" alt="">
                 <!-- 箭頭圖示 -->
                 <button type="button" class="border-0 bg-transparent arrow-left d-md-none" @click="move='left'">
                   <div class="bg-black rounded-circle d-flex justify-content-center align-items-center shadow " style="width:40px ; height:40px;">
@@ -133,7 +133,7 @@ arrow_forward
 </span>前往諮詢</button>
         </div>
         <div class="col-md-6 d-flex align-items-md-end">
-          <img class="img-fluid" src="../assets/images/線上諮詢.png" alt="">
+          <img class="img-fluid" src="../assets/images/ask.png" alt="">
         </div>
       </div>
     </div>
