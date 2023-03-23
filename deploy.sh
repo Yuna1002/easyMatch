@@ -25,6 +25,6 @@ git commit -m 'deploy'
 
 # if you are deploying to https://yuna1002.github.io/easyMatch
 # git push -f git@github.com:yuna1002/easyMatch.git main:gh-pages
-git push -f https://github.com/Yuna1002/easyMatch.git main:gh-pages
+git push -f https://github.com/yuna1002/easyMatch.git main:gh-pages
 
 cd -
