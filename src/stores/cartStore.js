@@ -19,6 +19,7 @@ export const cartStore = defineStore('cart', {
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
           this.cart = res.data.data
+          this.cart.group=1
           this.checkCart()
           // 在頁面載入時讀取 localStorage 中的值，如果有的話
           const savedOption = localStorage.getItem('selectedGroup')
