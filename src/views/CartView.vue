@@ -86,6 +86,7 @@ export default {
 
   },
   methods: {
+    ...mapActions(cartStore, ['getCart']),
     ...mapActions(cartStore, ['delCart']),
     ...mapActions(cartStore, ['saveToLocal']),
     checkCart(){
@@ -108,12 +109,7 @@ export default {
     }
   },
   mounted(){
-    console.log('重新整理')
-     // 在頁面載入時讀取 localStorage 中的值，如果有的話
-    const savedOption = localStorage.getItem('selectedGroup')
-    if (savedOption) {
-      this.cart.group = parseInt(savedOption)
-    }
+    this.getCart();
   }
 }
 </script>

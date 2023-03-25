@@ -11,7 +11,6 @@ export const cartStore = defineStore('cart', {
       cart: { group: 1 }, //carts,total,finalTotal(優惠券折扣)
       cartNum: 0,
       openToast:false,
-      //localStorage:1
     }
   },
   actions: {
@@ -20,9 +19,13 @@ export const cartStore = defineStore('cart', {
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
           this.cart = res.data.data
-          this.cart.group = 1
+          this.checkCart()
+          // 在頁面載入時讀取 localStorage 中的值，如果有的話
+          const savedOption = localStorage.getItem('selectedGroup')
+          if (savedOption) {
+            this.cart.group = parseInt(savedOption)
+           }
           this.calcCartNum()
-          //console.log('購物車資料', this.cart)
           this.openToast=false
         })
         .catch((err) => {
@@ -40,10 +43,7 @@ export const cartStore = defineStore('cart', {
       axios
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
         .then((res) => {
-          //console.log('加入購物車', res)
-          //alert(res.data.message)
           if (res.data.success===true) {
-            //this.$refs.SuccessToast.show()
             this.openToast=true
           }
           this.getCart()
@@ -66,18 +66,21 @@ export const cartStore = defineStore('cart', {
             timer: 1500,
           });
           this.getCart()
-          this.cart.group=1
-          this.saveToLocal()
         })
         .catch((err) => {
           alert(err.data.message)
         })
     },
     saveToLocal(){
-      console.log('執行',this.cart.group)
-      localStorage.setItem('selectedGroup', this.cart.group)
+        localStorage.setItem('selectedGroup', this.cart.group)
 
+    },
+    checkCart(){
+      if(this.cart.carts.length===0){
+        localStorage.setItem('selectedGroup',1)
+      }
     }
+
   },
   getters: {}
 })

@@ -108,7 +108,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'pinia'
+import { mapState} from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import Swal from 'sweetalert2'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
@@ -149,10 +149,8 @@ export default {
           alert(err.data.message)
         })
     },
-    ...mapActions(cartStore, ['getCart'])
   },
   mounted(){
-    console.log('重新整理')
      // 在頁面載入時讀取 localStorage 中的值，如果有的話
     const savedOption = localStorage.getItem('selectedGroup')
     if (savedOption) {
