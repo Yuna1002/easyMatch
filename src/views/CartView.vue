@@ -14,11 +14,8 @@
                   <th class="w-semibold"></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr v-if="!cart.carts.length">
-                  <td class="text-center ps-9" colspan="3">購物車尚未有產品</td>
-                </tr>
-                <template v-else>
+              <tbody v-if="Array.isArray(cart.carts)" >
+                <template v-if="cart.carts.length>0">
                   <tr v-for="item in cart.carts" :key="item.id">
                     <td class="d-md-flex align-items-md-center">
                       <div class="me-8 d-none d-md-block" style="width: 150px">
@@ -43,13 +40,16 @@
                     </td>
                   </tr>
                 </template>
+                <tr v-else>
+                  <td class="text-center ps-9" colspan="3">購物車尚未有產品</td>
+                </tr>
               </tbody>
             </table>
             <!-- 產品組數選單 -->
             <div class="d-flex align-items-center justify-content-end mb-8">
               <p class="me-4">組數</p>
               <div class="me-4" style="width: 80px">
-                <select name="" id="" class="form-control me-2" v-model="cart.group">
+                <select name="" id="" class="form-control me-2" v-model="cart.group" @change="saveToLocal">
                   <option :value="i" v-for="i in 5" :key="i" class="text-center">
                     {{ i }}
                   </option>
@@ -82,10 +82,12 @@ import { cartStore } from '../stores/cartStore'
 import Swal from 'sweetalert2'
 export default {
   computed: {
-    ...mapState(cartStore, ['cart'])
+    ...mapState(cartStore, ['cart']),
+
   },
   methods: {
     ...mapActions(cartStore, ['delCart']),
+    ...mapActions(cartStore, ['saveToLocal']),
     checkCart(){
       if(!this.cart.carts.length){
         Swal.fire({
@@ -103,6 +105,14 @@ export default {
       }else{
         this.$router.push('/order')
       }
+    }
+  },
+  mounted(){
+    console.log('重新整理')
+     // 在頁面載入時讀取 localStorage 中的值，如果有的話
+    const savedOption = localStorage.getItem('selectedGroup')
+    if (savedOption) {
+      this.cart.group = parseInt(savedOption)
     }
   }
 }

@@ -10,7 +10,8 @@ export const cartStore = defineStore('cart', {
     return {
       cart: { group: 1 }, //carts,total,finalTotal(優惠券折扣)
       cartNum: 0,
-      openToast:false
+      openToast:false,
+      //localStorage:1
     }
   },
   actions: {
@@ -65,10 +66,17 @@ export const cartStore = defineStore('cart', {
             timer: 1500,
           });
           this.getCart()
+          this.cart.group=1
+          this.saveToLocal()
         })
         .catch((err) => {
           alert(err.data.message)
         })
+    },
+    saveToLocal(){
+      console.log('執行',this.cart.group)
+      localStorage.setItem('selectedGroup', this.cart.group)
+
     }
   },
   getters: {}

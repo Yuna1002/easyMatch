@@ -143,12 +143,21 @@ export default {
           })
           this.$refs.form.resetForm()
           this.getCart()
+          localStorage.clear()
         })
         .catch((err) => {
           alert(err.data.message)
         })
     },
     ...mapActions(cartStore, ['getCart'])
+  },
+  mounted(){
+    console.log('重新整理')
+     // 在頁面載入時讀取 localStorage 中的值，如果有的話
+    const savedOption = localStorage.getItem('selectedGroup')
+    if (savedOption) {
+      this.cart.group = parseInt(savedOption)
+    }
   }
 }
 </script>
