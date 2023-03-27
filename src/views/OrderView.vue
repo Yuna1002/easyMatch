@@ -1,7 +1,14 @@
 <template>
   <div class="bg-tertiary-100">
-    <div class="container pt-12 pb-12">
-      <div class="row">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><RouterLink to="/">首頁</RouterLink></li>
+                <li class="breadcrumb-item"><RouterLink to="/cart">購物車</RouterLink></li>
+                <li class="breadcrumb-item active" aria-current="page">確認訂單</li>
+            </ol>
+        </nav>
+      <div class="row  pt-12 pb-12">
         <div class="col-lg-4 mb-8">
           <h2 class="h4 mb-6 text-center">訂單明細</h2>
           <div class="bg-card-bg py-6 px-6">
@@ -108,7 +115,7 @@
   </div>
 </template>
 <script>
-import { mapState} from 'pinia'
+import { mapState, mapActions} from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import Swal from 'sweetalert2'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
@@ -123,30 +130,39 @@ export default {
           address: ''
         },
         message: ''
-      }
+      },
+      orderId: '',
     }
   },
   computed: {
     ...mapState(cartStore, ['cart'])
   },
   methods: {
+    ...mapActions(cartStore, ['getCart']),
     submitOrder() {
       const data = this.form
       this.$http
         .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/order`, { data })
-        .then(() => {
+        .then((res) => {
           Swal.fire({ 
           icon: 'success',
+          toast: true,
+          position: 'top',
           title: '訂單建立成功', 
-          timer: 2000, //如果不要確認按鈕，1.5秒後自動關閉
-          confirmButtonColor: '#46afa2'
+          timer: 1500, //如果不要確認按鈕，1.5秒後自動關閉
+          showConfirmButton: false,
           })
           this.$refs.form.resetForm()
           this.getCart()
-          localStorage.clear()
+          //將總計金額(*group)存在localStorage
+          localStorage.setItem('totalIncludeGroup',this.cart.total*this.cart.group)
+          // localStorage.clear()
+          this.orderId = res.data.orderId;
+          this.$router.push(`/orderPay/${this.orderId}`);
+
         })
         .catch((err) => {
-          alert(err.data.message)
+          console.log(err)
         })
     },
   },

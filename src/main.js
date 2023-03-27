@@ -10,6 +10,7 @@ import router from './router'
 import './assets/all.scss'
 import 'bootstrap';
 import 'animate.css';
+import { date, toThousands } from './methods/filters'
 
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import AllRules from '@vee-validate/rules'
@@ -31,6 +32,11 @@ import { LoadingPlugin } from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/css/index.css'
 
 const app = createApp(App)
+
+app.config.globalProperties.$filters = {
+  date,
+  toThousands
+}
 
 app.use(createPinia())
 app.use(router)
