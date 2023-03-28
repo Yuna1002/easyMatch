@@ -1,14 +1,47 @@
 <template>
   <div class="bg-tertiary-100">
     <div class="container">
-      <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3">
+      <!-- 麵包屑 -->
+      <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3 mb-6">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><RouterLink to="/">首頁</RouterLink></li>
-                <li class="breadcrumb-item"><RouterLink to="/cart">購物車</RouterLink></li>
+                <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
+                <li class="breadcrumb-item"><RouterLink to="/cart" class="text-primary-200">購物車</RouterLink></li>
                 <li class="breadcrumb-item active" aria-current="page">確認訂單</li>
             </ol>
         </nav>
-      <div class="row  pt-12 pb-12">
+      <!-- 進度條 -->
+      <div class="mb-12">
+        <!-- timeline -->
+      <div class="row">
+        <div class="col-9 col-md-7 mx-auto">
+          <div class="border border-black"></div>
+        </div>
+      </div>
+      <!-- timeline-pointer -->
+      <div class="row">
+        <div class="col-3 col-md-5">
+          <div class="pointer d-flex flex-column align-items-center ps-5">
+            <div class="pointer-num pointer-num-active fs-3 mb-1 text-white fw-semibold">1</div>
+            <p class="fs-4 text-primary-200">填寫資料</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-2">
+          <div class="pointer d-flex flex-column align-items-center">
+            <div class="pointer-num fs-3 mb-1 fw-semibold">2</div>
+            <p class="fs-4">確認付款</p>
+          </div>
+        </div>
+        <div class="col-3 col-md-5">
+          <div class="pointer d-flex flex-column align-items-center pe-2">
+            <div class="pointer-num fs-3 mb-1 fw-semibold">3</div>
+            <p class="fs-4">訂購完成</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      
+      <!-- content -->
+      <div class="row  pb-40">
         <div class="col-lg-4 mb-8">
           <h2 class="h4 mb-6 text-center">訂單明細</h2>
           <div class="bg-card-bg py-6 px-6">
@@ -167,11 +200,11 @@ export default {
     },
   },
   mounted(){
-     // 在頁面載入時讀取 localStorage 中的值，如果有的話
-    const savedOption = localStorage.getItem('selectedGroup')
-    if (savedOption) {
-      this.cart.group = parseInt(savedOption)
-    }
+    const loader = this.$loading.show()  
+        setTimeout(() => {
+            loader.hide()
+        }, 600)
+    this.getCart()
   }
 }
 </script>

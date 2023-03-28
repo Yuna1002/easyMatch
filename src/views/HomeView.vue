@@ -145,9 +145,6 @@ arrow_forward
 
 <script>
 import { RouterLink } from 'vue-router'
-import {productsStore} from '../stores/productsStore'
-import { mapState, mapActions } from 'pinia'
-
 import HotProductsSwiper from '../components/HotProductsSwiper.vue'
 import SuccessToast from '../components/SuccessToast.vue'
 import AOS from 'aos'
@@ -165,14 +162,7 @@ export default{
     HotProductsSwiper,
     SuccessToast
   },
-  computed: {
-    ...mapState(productsStore, ['products'])
-  },
-  methods:{
-    ...mapActions(productsStore, ['getProducts']),
-  },
   mounted(){
-    this.getProducts()
     AOS.init({
       offset: 100,
       duration:800,

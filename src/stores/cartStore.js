@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-// import Loading from 'vue-loading-overlay';
-// import 'vue-loading-overlay/dist/css/index.css';
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 
 
@@ -13,17 +11,15 @@ export const cartStore = defineStore('cart', {
       cart: { group: 1 }, //carts,total,finalTotal(優惠券折扣)
       cartNum: 0,
       openToast:false,
-      fullPage: true
+      loadingItem: ""
     }
   },
   actions: {
     getCart() {
-      //const loader = this.$loading.show()
       axios
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`)
         .then((res) => {
           this.cart = res.data.data
-          //loader.hide()
           this.cart.group=1
           this.checkCart()
           // 在頁面載入時讀取 localStorage 中的值，如果有的話
@@ -42,6 +38,7 @@ export const cartStore = defineStore('cart', {
       this.cartNum = this.cart.carts.length
     },
     addToCart(product_id, qty = 30) {
+      this.loadingItem = product_id;
       const data = {
         product_id,
         qty
@@ -60,6 +57,7 @@ export const cartStore = defineStore('cart', {
         })
     },
     delCart(id) {
+      this.loadingItem = id;
       axios
         .delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${id}`)
         .then((res) => {

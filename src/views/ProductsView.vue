@@ -51,9 +51,8 @@
           </div>
         </div>
         <!-- 產品列表 -->
-
-        <div class="col-md-9">          
-          <div class="row vl-parent " ref="productsContainer">
+        <div class="col-md-9 vl-parent" ref="productsContainer">          
+          <div class="row" >
             <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <a
                 href=""
@@ -87,7 +86,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary text-white disabled"
-                    v-if="cart.carts.some((item) => item.product_id === product.id)"
+                    v-if="cart.carts?.some((item) => item.product_id === product.id)"
                   >
                     已加入
                   </button>
@@ -95,11 +94,12 @@
                     type="button"
                     v-else
                     class="btn btn-primary-200 text-white"
-                    
                     :disabled="loadingItem === product.id"
                   >
-          
-                    加入購物車
+                  <i
+                    class="fas fa-spinner fa-pulse"
+                    v-if="product.id === loadingItem"
+                  ></i>加入購物車
                   </button>
                 </div>
               </a>
@@ -126,7 +126,6 @@ export default {
       tempProduct: {},
       active: '全部',
       fullPage: false,
-      loadingItem: '' //存id,當事件有此id時 disabled
     }
   },
   components: {
@@ -172,6 +171,7 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ['cart']),
+    ...mapState(cartStore, ['loadingItem']),
   },
   mounted() {
    this.getProducts();

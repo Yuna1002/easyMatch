@@ -1,6 +1,7 @@
 <template>
   <div class="bg-tertiary-100">
     <div class="container pt-12 pb-40">
+      <h1 class="h2 text-center mb-8">購物車</h1>
       <div class="row justify-content-center">
         <div class="col-10">
           <div class="bg-card-bg px-8 py-12 mb-8">
@@ -34,7 +35,11 @@
                         type="button"
                         class="btn btn-outline-danger btn-sm"
                         @click="delCart(item.id)"
-                      >
+                        :disabled="loadingItem === item.id "
+                      ><i
+                        class="fas fa-spinner fa-pulse"
+                        v-if="item.id === loadingItem"
+                      ></i>
                         x
                       </button>
                     </td>
@@ -80,9 +85,11 @@
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import Swal from 'sweetalert2'
+
 export default {
   computed: {
     ...mapState(cartStore, ['cart']),
+    ...mapState(cartStore, ['loadingItem']),
 
   },
   methods: {
@@ -109,6 +116,10 @@ export default {
     }
   },
   mounted(){
+    const loader = this.$loading.show()  
+        setTimeout(() => {
+            loader.hide()
+        }, 600)
     this.getCart();
   }
 }

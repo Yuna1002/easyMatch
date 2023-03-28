@@ -1,17 +1,18 @@
 <template>
-  <div class="container pt-12" ref="productsContainer">
+  <div class="container pt-12 pb-40">
     <div class="row pb-12">
       <div class="col-md-6">
         <img class="img-fluid" :src="product.imageUrl" alt="" />
       </div>
       <div class="col-md-6">
+        <!-- 麵包屑 -->
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><RouterLink to="/">首頁</RouterLink></li>
-          <li class="breadcrumb-item"><RouterLink to="/products">產品列表</RouterLink></li>
+          <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
+          <li class="breadcrumb-item"><RouterLink to="/products" class="text-primary-200">產品列表</RouterLink></li>
           <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
         </ol>
-      </nav>
+        </nav>
         <div class="d-flex align-items-center mb-6">
           <h1 class="h2 fw-bold mb-0">
             {{ product.title }}
@@ -28,7 +29,7 @@
         <button
           type="button"
           class="btn btn-secondary text-white disabled py-2 px-20"
-          v-if="cart.carts.some((item) => item.product_id === product.id)"
+          v-if="cart.carts?.some((item) => item.product_id === product.id)"
         >
           已加入
         </button>
@@ -37,7 +38,10 @@
           type="button"
           class="btn btn-primary-200 text-white py-2 px-19"
           @click="addToCart(product.id, qty)"
-        >
+        ><i
+            class="fas fa-spinner fa-pulse"
+            v-if="product.id === loadingItem"
+          ></i>
           加入購物車
         </button>
       </div>
@@ -116,7 +120,6 @@ export default {
     return {
       product: {},
       activeTab: 1,
-      fullPage: true,
     }
   },
   components:{
@@ -125,9 +128,7 @@ export default {
   methods: {
     getProduct() {
       const { id } = this.$route.params
-      const loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.productsContainer
-      })
+      const loader = this.$loading.show()
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/product/${id}`)
         .then((res) => {
@@ -142,7 +143,8 @@ export default {
     ...mapActions(cartStore, ['addToCart'])
   },
   computed: {
-    ...mapState(cartStore, ['cart'])
+    ...mapState(cartStore, ['cart']),
+    ...mapState(cartStore, ['loadingItem']),
   },
   mounted() {
     this.getProduct()

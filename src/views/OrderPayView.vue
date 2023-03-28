@@ -1,13 +1,43 @@
 <template>
     <div class="bg-tertiary-100">
         <div class="container  bg-tertiary-100">
-            <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3">
+            <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3 mb-6">
             <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><RouterLink to="/">首頁</RouterLink></li>
+                <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
                 <li class="breadcrumb-item active" aria-current="page">確認付款</li>
             </ol>
             </nav>
-            <div class="row justify-content-center pt-12 pb-40">
+             <!-- 進度條 -->
+            <div class="mb-4">
+                <!-- timeline -->
+                <div class="row">
+                    <div class="col-9 col-md-7 mx-auto timeline" :class="{'timeline-2':order.is_paid}">
+                    </div>
+                </div>
+                <!-- timeline-pointer -->
+                <div class="row">
+                    <div class="col-3 col-md-5">
+                    <div class="pointer d-flex flex-column align-items-center ps-5">
+                        <div class="pointer-num pointer-num-active fs-3 mb-1 text-white fw-semibold">1</div>
+                        <p class="fs-4 text-primary-200">填寫資料</p>
+                    </div>
+                    </div>
+                    <div class="col-6 col-md-2">
+                    <div class="pointer d-flex flex-column align-items-center">
+                        <div class="pointer-num pointer-num-active fs-3 mb-1 fw-semibold text-white  ">2</div>
+                        <p class="fs-4 text-primary-200 ">確認付款</p>
+                    </div>
+                    </div>
+                    <div class="col-3 col-md-5">
+                    <div class="pointer d-flex flex-column align-items-center pe-2">
+                        <div class="pointer-num fs-3 mb-1 fw-semibold" :class="{'text-white':order.is_paid,'bg-primary':order.is_paid,'border-0':order.is_paid}">3</div>
+                        <p class="fs-4" :class="{'text-primary-200':order.is_paid}">訂購完成</p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 訂單資訊 -->
+            <div class="row justify-content-center  pb-40">
                 <div class="col-10 col-md-8">
                     <div class="bg-card-bg p-6">
                         <h2 class="h4">訂單資訊</h2>
@@ -60,7 +90,7 @@
                                 </tr>
                             </tbody>
                             </table>
-                            <button type="submit" class="btn btn-primary-200 w-100 text-white py-3">確認付款</button>
+                            <button type="submit" class="btn btn-primary-200 w-100 text-white py-3" :class="{'disabled':order.is_paid}">確認付款</button>
                         </form>
                     </div>
                 </div>
@@ -116,7 +146,11 @@ export default{
        }
 
     },
-    mounted() {        
+    mounted() { 
+        const loader = this.$loading.show()  
+        setTimeout(() => {
+            loader.hide()
+        }, 600)       
         this.getOrder();
     },
 }

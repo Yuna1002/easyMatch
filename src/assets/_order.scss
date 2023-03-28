@@ -1,0 +1,26 @@
+.pointer {
+    position: relative;
+    top: -10px;
+    &-num {
+        border: 1px solid $dark;
+        background: $tertiary-100;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        &-active {
+        background: $primary;
+        border: none;
+        }
+    }
+}
+
+//確認付款進度條
+.timeline {
+    border: 1px solid transparent;
+    border-image: linear-gradient(to right, $primary 50%, $dark 50%);
+    border-image-slice: 1;
+    &-2{
+        border: 1px solid $primary
+    }
+}

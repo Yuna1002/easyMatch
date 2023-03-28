@@ -46,7 +46,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary text-white disabled rounded-pill py-3"
-                    v-if="cart.carts.some((item) => item.product_id === product.id)"
+                    v-if="cart.carts?.some((item) => item.product_id === product.id)"
                   >
                     已加入
                   </button>
