@@ -25,7 +25,7 @@
               <RouterLink to="/" class="nav-link">首頁 </RouterLink>
             </li>
             <li class="nav-item me-lg-9 ">
-              <RouterLink to="/products" class="nav-link ">產品列表 </RouterLink>
+              <RouterLink to="/products" class="nav-link ">所有產品</RouterLink>
             </li>
             <li class="nav-item ">
               <RouterLink

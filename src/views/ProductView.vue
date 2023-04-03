@@ -9,7 +9,7 @@
         <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
-          <li class="breadcrumb-item"><RouterLink to="/products" class="text-primary-200">產品列表</RouterLink></li>
+          <li class="breadcrumb-item"><RouterLink to="/products" class="text-primary-200">所有產品</RouterLink></li>
           <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
         </ol>
         </nav>

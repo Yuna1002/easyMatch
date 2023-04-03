@@ -115,7 +115,7 @@ arrow_forward
   <section class="bg-tertiary-100">
     <div class="container pt-30 pb-40">
       <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-5" data-aos="fade-right">熱門產品</h2>
-      <div class="row">
+      <div class="row ">
         <HotProductsSwiper></HotProductsSwiper>
       </div>
     </div>
@@ -127,7 +127,7 @@ arrow_forward
       <div class="row">
         <div class="col-md-6">
           <h2 class="fs-lg-9 fs-md-7 mb-6 fw-bold" data-aos="fade-right" >專業線上諮詢</h2>
-          <p class="fs-lg-6 mb-10">線上真人專家諮詢，為您的客製化需求，提供良好的建議</p>
+          <p class="fs-lg-6 mb-10" data-aos="fade-up">線上真人專家諮詢，為您的客製化需求，提供良好的建議</p>
           <button type="button" class="btn btn-white text-primary-200 rounded-pill py-6 px-8 fs-lg-5 fw-semibold mb-md-25 btn-hover d-flex align-items-center" @mouseenter="hover=true"  @mouseleave="hover=false"><span class="material-symbols-outlined me-2 fw-bold"  v-if="hover===true">
 arrow_forward
 </span>前往諮詢</button>
@@ -138,6 +138,26 @@ arrow_forward
       </div>
     </div>
   </section>
+<!-- 好評回饋 -->
+<section class="bg-tertiary-100">
+  <div class="container pt-30 pb-40">
+    <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-20 d-lg-none">好評回饋</h2>
+    <div class="row flex-nowrap align-items-center">
+        <div class="col-lg-3  d-none d-lg-block">
+          <div class="card bg-primary border-0 rounded-4  d-none d-lg-block py-40 px-6" >
+            <img src="../assets/images/commentIcon.svg" class="d-block card-img-top mb-11 mx-auto animate__animated animate__shakeX animate__delay-4s animate__repeat-3" alt="icon" style="width: 46px;">
+            <h2 class="text-white text-center fs-lg-8 fs-6 fw-bold mb-4">好評回饋</h2>
+            <p class="text-white text-center fs-lg-6 fs-4 mb-4">Comment</p>
+          </div>
+        </div>
+        <div class="col-lg-9 ">
+          <div class="row ">
+            <CommentSwiper></CommentSwiper>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
 
 
 
@@ -146,6 +166,7 @@ arrow_forward
 <script>
 import { RouterLink } from 'vue-router'
 import HotProductsSwiper from '../components/HotProductsSwiper.vue'
+import CommentSwiper from '../components/CommentSwiper.vue'
 import SuccessToast from '../components/SuccessToast.vue'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
@@ -160,6 +181,7 @@ export default{
   components:{
     RouterLink,
     HotProductsSwiper,
+    CommentSwiper,
     SuccessToast
   },
   mounted(){
