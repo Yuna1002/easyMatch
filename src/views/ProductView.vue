@@ -50,15 +50,15 @@
 
     <ul class="list-unstyled d-flex justify-content-center mb-8">
       <!-- :class="{ tabActive: activeTab === 1 }" -->
-      <li class="me-8 pb-2 px-3 border-bottom border-4 border-primary">
-        <a href="" class="text-dark fw-semibold fs-5" @click.prevent="activeTab = 1">產品說明</a>
+      <li class="me-8 pb-2 px-3 ">
+        <a href="" class="text-dark fw-semibold fs-5" >產品說明</a>
       </li>
-      <li>
+      <!-- <li>
         <a href="" class="text-dark fw-semibold fs-5" @click.prevent="activeTab = 2">產品評價</a>
-      </li>
+      </li> -->
     </ul>
     <div class="tab-content">
-      <div v-if="activeTab === 1">
+      <div >
         <div class="mb-7">
           <h3 class="h6 fw-semibold">產品保健</h3>
           <p>{{ product.description }}</p>
@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      <div v-if="activeTab === 2">產品評價</div>
+      <!-- <div v-if="activeTab === 2">產品評價</div> -->
     </div>
   </div>
 </template>
@@ -119,7 +119,7 @@ export default {
   data() {
     return {
       product: {},
-      activeTab: 1,
+      //activeTab: 1,
     }
   },
   components:{

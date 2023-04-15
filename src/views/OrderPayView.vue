@@ -126,6 +126,12 @@ export default{
         })
         
        },
+       scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
        payOrder(orderId){
         this.$http
           .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/pay/${orderId}`)
@@ -141,6 +147,7 @@ export default{
                     showConfirmButton: false,
                 })
                 this.getOrder();
+                this.scrollToTop();
             }
           })
        }

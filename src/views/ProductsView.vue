@@ -158,12 +158,18 @@ export default {
         this.filterProducts = filter
       }
     },
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
     handleClick(e, id) {
       //console.log(e)
       if (e.target.nodeName === 'BUTTON') {
         this.addToCart(id)
       } else {
-        this.$router.push(`/product/${id}`)
+        this.$router.push(`/product/${id}`,this.scrollToTop())
       }
     },
     ...mapActions(cartStore, ['getCart']),
@@ -175,7 +181,7 @@ export default {
   },
   mounted() {
    this.getProducts();
-    
+  
   }
 }
 </script>

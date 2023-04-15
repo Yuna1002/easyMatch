@@ -172,6 +172,12 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['getCart']),
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
     submitOrder() {
       const data = this.form
       this.$http
@@ -191,7 +197,7 @@ export default {
           localStorage.setItem('totalIncludeGroup',this.cart.total*this.cart.group)
           // localStorage.clear()
           this.orderId = res.data.orderId;
-          this.$router.push(`/orderPay/${this.orderId}`);
+          this.$router.push(`/orderPay/${this.orderId}`,this.scrollToTop());
 
         })
         .catch((err) => {

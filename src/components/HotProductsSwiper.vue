@@ -101,11 +101,17 @@ export default{
   methods: {
     ...mapActions(productsStore, ['getProducts']),
     ...mapActions(cartStore, ['addToCart']),
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    },
     handleClick(e, id) {
       if (e.target.nodeName === 'BUTTON') {
         this.addToCart(id)
       } else {
-        this.$router.push(`/product/${id}`)
+        this.$router.push(`/product/${id}`,this.scrollToTop())
       }
     },
     iconUp(e){

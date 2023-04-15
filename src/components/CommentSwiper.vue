@@ -44,9 +44,7 @@
                     </div>
                
             </div>
-           
-            
-                
+
             </SwiperSlide>
             <SwiperSlide>
                 <div class="card bg-white rounded-4 py-20 px-8 px-lg-12 border-0 align-items-center h-100 shadow" >
