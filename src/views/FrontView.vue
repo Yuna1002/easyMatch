@@ -1,9 +1,9 @@
-<template>
-  <header class="sticky-top">
+<template class="wrapper">
+  <header class="sticky-top page-header">
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
       <div class="container ">
         <a class="navbar-brand " href="/">
-          <img src="../assets/images/logo-01.png" alt=""  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
+          <img src="../assets/images/logo-01.png" alt="logo"  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
         ><a class="navbar-brand" href="#" style="font-family:Josefin Sans">EASY MATCH</a>
         <button
           class="navbar-toggler"
@@ -13,13 +13,10 @@
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
-          
         >
-
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse " id="navbarNav" >
-
           <ul class="navbar-nav ms-auto d-flex align-items-center " >
             <li class="nav-item me-lg-9">
               <RouterLink to="/" class="nav-link">首頁 </RouterLink>
@@ -40,8 +37,7 @@
                 >
                   {{ cartNum }}
                 </span>
-              </div>
-                
+              </div>    
               </RouterLink>
             </li>
           </ul>
@@ -49,22 +45,22 @@
       </div>
     </nav>
   </header>
-  <RouterView></RouterView>
-  <footer class="bg-primary-200 py-10">
-  <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
-  <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
-</footer>
+  <RouterView class="page-body"/>
+  <footer class="bg-primary-200 py-10 page-footer">
+    <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
+    <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
+  </footer>
 </template>
+
 <script>
 import { RouterView, RouterLink } from 'vue-router'
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
-
 export default {
   data(){
     return{
       openNav:false,
-      windowWidth:window.innerWidth
+      windowWidth:window.innerWidth,
     }
   },
   components: {
@@ -92,11 +88,20 @@ export default {
       }else{
         this.openNav=true
       }
-    }
-
+    },
+    navbarCollapse() {
+      const navLink = document.querySelectorAll('.nav-link');
+      const navbarCollapse = document.querySelector('.navbar-collapse');
+      navLink.forEach((item) => {
+        item.addEventListener('click', () => {
+          navbarCollapse.classList.remove('show');
+        });
+      });
+    },
   },
   mounted() {
     this.getCart()
+    this.navbarCollapse();
     this.$nextTick(() => {
       window.addEventListener('resize', this.onResize);
     })
@@ -108,3 +113,19 @@ export default {
   }
 }
 </script>
+
+<style>
+  .wrapper {
+    box-sizing: border-box;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .page-header, .page-footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+  .page-body {
+    flex-grow: 1;
+  }
+</style>

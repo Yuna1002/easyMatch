@@ -21,6 +21,7 @@
 </div>
 </div>
 </template>
+
 <script>
 import Toast from 'bootstrap/js/dist/toast'
 import { mapState} from 'pinia'
@@ -32,7 +33,6 @@ export default {
     }
   },
   methods: {
-   
     hide() {
       this.successToast.hide()
     },
@@ -46,14 +46,12 @@ export default {
   watch:{
       openToast(){
         if(this.openToast===true){
-          this.show();
-          
+          this.show(); 
         }
       }
     },
   mounted() {
     this.successToast = new Toast(this.$refs.successToast,{delay:1000})
-    
   }
 }
 </script>

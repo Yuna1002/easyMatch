@@ -1,16 +1,15 @@
 <template>
   <div class="bg-tertiary-100">
-    <SuccessToast></SuccessToast>
+  <SuccessToast/>
     <div class="container pt-12 pb-40">
-      
       <div class="row">
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
           <div class="list-group  flex-row flex-md-column pt-4 bg-tertiary-100 rounded-0  sidebar-position">
-            <h2 class="fs-4 ps-8 mb-6">
+            <h2 class="fs-4 ps-md-8 mb-6">
               <a
                 href=""
-                class="list-group-item sidebar-link"
+                class="list-group-item sidebar-link text-nowrap"
                 @click.prevent="filterProduct('全部')"
                 :class="{ 'sidebar-link-active': active === '全部' }"
               >
@@ -20,7 +19,7 @@
             <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item sidebar-link"
+                class="list-group-item sidebar-link text-nowrap"
                 @click.prevent="filterProduct('維生素')"
                 @click="active = '維生素'"
                 :class="{ 'sidebar-link-active': active === '維生素' }"
@@ -31,7 +30,7 @@
             <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item sidebar-link"
+                class="list-group-item sidebar-link text-nowrap"
                 @click.prevent="filterProduct('礦物質')"
                 :class="{ 'sidebar-link-active': active === '礦物質' }"
               >
@@ -41,7 +40,7 @@
             <h2 class="fs-4 ps-8 mb-6">
               <a
                 href=""
-                class="list-group-item sidebar-link"
+                class="list-group-item sidebar-link text-nowrap"
                 @click.prevent="filterProduct('功能性補給')"
                 :class="{ 'sidebar-link-active': active === '功能性補給' }"
               >
@@ -52,8 +51,8 @@
         </div>
         <!-- 產品列表 -->
         <div class="col-md-9 vl-parent" ref="productsContainer">          
-          <div class="row" >
-            <div class="col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
+          <div class="row justify-content-center justify-content-lg-start" >
+            <div class="col-10 col-sm-12 col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
               <a
                 href=""
                 class="card bg-card-bg border-0 h-100 pb-5 products-card"
@@ -81,7 +80,7 @@
                   </p>
 
                   <div class="d-flex align-items-center justify-content-end mb-1">
-                    <p class="fw-semibold text-primary-200">{{ `$${product.price} /顆` }}</p>
+                    <p class="fw-semibold text-primary-200">{{ `NT$${product.price} /顆` }}</p>
                   </div>
                   <button
                     type="button"
@@ -128,7 +127,6 @@ export default {
   },
   components: {
     SuccessToast,
-
   },
   methods: {
     getProducts() {
@@ -171,7 +169,7 @@ export default {
       }
     },
     ...mapActions(cartStore, ['getCart']),
-   ...mapActions(cartStore, ['addToCart']),
+    ...mapActions(cartStore, ['addToCart']),
   },
   computed: {
     ...mapState(cartStore, ['cart']),
@@ -179,7 +177,6 @@ export default {
   },
   mounted() {
    this.getProducts();
-  
   }
 }
 </script>

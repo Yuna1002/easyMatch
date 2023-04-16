@@ -2,13 +2,10 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
-
-
-
 export const cartStore = defineStore('cart', {
   state: () => {
     return {
-      cart: { group: 1 }, //carts,total,finalTotal(優惠券折扣)
+      cart: { group: 1 }, 
       cartNum: 0,
       openToast:false,
       loadingItem: ""
@@ -84,7 +81,6 @@ export const cartStore = defineStore('cart', {
         localStorage.setItem('selectedGroup',1)
       }
     }
-
   },
   getters: {}
 })

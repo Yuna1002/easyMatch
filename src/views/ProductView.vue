@@ -1,18 +1,18 @@
 <template>
   <div class="container pt-12 pb-40">
-    <div class="row pb-12">
-      <div class="col-md-6">
-        <img class="img-fluid" :src="product.imageUrl" alt="" />
-      </div>
-      <div class="col-md-6">
-        <!-- 麵包屑 -->
-        <nav aria-label="breadcrumb">
+    <!-- 麵包屑 -->
+    <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
           <li class="breadcrumb-item"><RouterLink to="/products" class="text-primary-200">所有產品</RouterLink></li>
           <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
         </ol>
         </nav>
+    <div class="row pb-12">
+      <div class="col-md-6">        
+        <img class="img-fluid" :src="product.imageUrl" :alt="product.title" />
+      </div>
+      <div class="col-md-6">        
         <div class="d-flex align-items-center mb-6">
           <h1 class="h2 fw-bold mb-0">
             {{ product.title }}
@@ -47,15 +47,10 @@
       </div>
     </div>
     <hr class="mb-6" />
-
     <ul class="list-unstyled d-flex justify-content-center mb-8">
-      <!-- :class="{ tabActive: activeTab === 1 }" -->
       <li class="me-8 pb-2 px-3 ">
         <a href="" class="text-dark fw-semibold fs-5" >產品說明</a>
       </li>
-      <!-- <li>
-        <a href="" class="text-dark fw-semibold fs-5" @click.prevent="activeTab = 2">產品評價</a>
-      </li> -->
     </ul>
     <div class="tab-content">
       <div >
@@ -110,6 +105,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapActions, mapState } from 'pinia'
 import { cartStore } from '../stores/cartStore'
@@ -119,7 +115,6 @@ export default {
   data() {
     return {
       product: {},
-      //activeTab: 1,
     }
   },
   components:{

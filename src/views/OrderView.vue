@@ -8,7 +8,7 @@
                 <li class="breadcrumb-item"><RouterLink to="/cart" class="text-primary-200">購物車</RouterLink></li>
                 <li class="breadcrumb-item active" aria-current="page">確認訂單</li>
             </ol>
-        </nav>
+      </nav>
       <!-- 進度條 -->
       <div class="mb-12">
         <!-- timeline -->
@@ -39,25 +39,23 @@
         </div>
       </div>
       </div>
-      
       <!-- content -->
       <div class="row  pb-40">
         <div class="col-lg-4 mb-8">
           <h2 class="h4 mb-6 text-center">訂單明細</h2>
           <div class="bg-card-bg py-6 px-6">
+            <p class="fw-semibold text-center mb-4">{{ `${cart.group * 30}天份` }}</p>
             <div
               v-for="item in cart.carts"
               :key="item.id"
               class="d-flex justify-content-between mb-1"
             >
               <p>{{ item.product.title }}</p>
-              <div class="d-flex">
-                <p class="me-2">{{ `${cart.group * 30}天份` }}</p>
-                <p>{{ `$${item.total * cart.group} ` }}</p>
-              </div>
+              <p>{{ `NT$${$filters.toThousands(item.total * cart.group)} ` }}</p>
             </div>
             <hr />
-            <p class="text-end fw-semibold">{{ `總計$ ${cart.total * cart.group}` }}</p>
+            
+            <p class="text-end fw-semibold">{{ `總計NT$ ${$filters.toThousands(cart.total * cart.group)}` }}</p>
           </div>
         </div>
         <!-- 表單 -->
@@ -67,7 +65,7 @@
             <div class="col-lg-10">
               <v-form ref="form" v-slot="{ errors }" @submit="submitOrder">
                 <div class="mb-4">
-                  <label for="name" class="form-label">收件人姓名</label>
+                  <label for="name" class="form-label">收件人姓名<span class="text-danger fs-3 ms-1">*必填</span></label>
                   <v-field
                     id="name"
                     name="姓名"
@@ -80,9 +78,8 @@
                   ></v-field>
                   <error-message name="姓名" class="invalid-feedback"></error-message>
                 </div>
-
                 <div class="mb-4">
-                  <label for="tel" class="form-label">收件人電話</label>
+                  <label for="tel" class="form-label">收件人電話<span class="text-danger fs-3 ms-1">*必填</span></label>
                   <v-field
                     id="tel"
                     name="電話"
@@ -95,9 +92,8 @@
                   ></v-field>
                   <error-message name="電話" class="invalid-feedback"></error-message>
                 </div>
-
                 <div class="mb-4">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email<span class="text-danger fs-3 ms-1">*必填</span></label>
                   <v-field
                     id="email"
                     name="email"
@@ -110,9 +106,8 @@
                   ></v-field>
                   <error-message name="email" class="invalid-feedback"></error-message>
                 </div>
-
                 <div class="mb-4">
-                  <label for="address" class="form-label">收件人地址</label>
+                  <label for="address" class="form-label">收件人地址<span class="text-danger fs-3 ms-1">*必填</span></label>
                   <v-field
                     id="address"
                     name="地址"
@@ -125,7 +120,6 @@
                   ></v-field>
                   <error-message name="地址" class="invalid-feedback"></error-message>
                 </div>
-
                 <div class="mb-4">
                   <label for="message" class="form-label">留言</label>
                   <textarea
@@ -147,6 +141,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import { mapState, mapActions} from 'pinia'
 import { cartStore } from '../stores/cartStore'
@@ -188,14 +183,13 @@ export default {
           toast: true,
           position: 'top',
           title: '訂單建立成功', 
-          timer: 1500, //如果不要確認按鈕，1.5秒後自動關閉
+          timer: 2000,
           showConfirmButton: false,
           })
           this.$refs.form.resetForm()
           this.getCart()
           //將總計金額(*group)存在localStorage
           localStorage.setItem('totalIncludeGroup',this.cart.total*this.cart.group)
-          // localStorage.clear()
           this.orderId = res.data.orderId;
           this.$router.push(`/orderPay/${this.orderId}`,this.scrollToTop());
 

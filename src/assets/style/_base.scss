@@ -1,7 +1,12 @@
-body {
+html, body {
   font-family: 'Inter', Arial, sans-serif;
   font-size: $spacer;
   color: $gray-900;
+
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 img {
   vertical-align: middle;

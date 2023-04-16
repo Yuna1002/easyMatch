@@ -9,9 +9,9 @@
             <table class="table align-middle border">
               <thead class="bg-primary text-white">
                 <tr>
-                  <th class="fw-semibold">產品</th>
-                  <th class="w-semibold text-center">每顆單價</th>
-                  <th class="w-semibold text-center">30天份金額</th>
+                  <th class="fw-semibold align-middle">產品</th>
+                  <th class="w-semibold text-center align-middle">每顆單價</th>
+                  <th class="w-semibold text-center align-middle">30天份金額</th>
                   <th class="w-semibold"></th>
                 </tr>
               </thead>
@@ -20,15 +20,15 @@
                   <tr v-for="item in cart.carts" :key="item.id">
                     <td class="d-md-flex align-items-md-center">
                       <div class="me-8 d-none d-md-block" style="width: 150px">
-                        <img class="img-fluid" :src="item.product.imageUrl" alt="" />
+                        <img class="img-fluid" :src="item.product.imageUrl" :alt="item.product.title" />
                       </div>
                       <p class="fw-semibold">{{ item.product.title }}</p>
                     </td>
                     <td class="text-center">
-                      {{ `$${item.product.price}` }}
+                      {{ `NT$${item.product.price}` }}
                     </td>
                     <td class="text-center">
-                      {{ `$${item.total}` }}
+                      {{ `NT$${item.total}` }}
                     </td>
                     <td class="text-center">
                       <button
@@ -46,7 +46,9 @@
                   </tr>
                 </template>
                 <tr v-else>
-                  <td class="text-center ps-9" colspan="3">購物車尚未有產品</td>
+                  <td class="text-center ps-9" colspan="3">購物車尚未有產品
+                    <RouterLink to="/products" class="btn btn-primary-200 py-1 text-white ms-2 ">前往購物</RouterLink>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -64,7 +66,7 @@
             </div>
             <div class="d-flex justify-content-end align-items-center">
               <p class="me-4 fw-semibold">總計</p>
-              <p class="fw-semibold fs-5">{{ `$${cart.total * cart.group}` }}</p>
+              <p class="fw-semibold fs-5">{{ `NT$${$filters.toThousands(cart.total * cart.group)}` }}</p>
             </div>
           </div>
           <div class="d-flex justify-content-end">
@@ -84,9 +86,12 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
+import { RouterLink } from 'vue-router'
 import Swal from 'sweetalert2'
-
 export default {
+  components:{
+    RouterLink
+  },
   computed: {
     ...mapState(cartStore, ['cart']),
     ...mapState(cartStore, ['loadingItem']),
@@ -115,7 +120,6 @@ export default {
               this.$router.push('/products')
             }
           })
-
       }else{
         this.$router.push('/order', this.scrollToTop())
       }
