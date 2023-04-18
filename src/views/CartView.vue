@@ -2,7 +2,7 @@
   <div class="bg-tertiary-100">
     <div class="container pt-12 pb-40">
       <h1 class="h2 text-center mb-8">購物車</h1>
-      <div class="row justify-content-center">
+       <div class="row justify-content-center">
         <div class="col-10">
           <div class="bg-card-bg px-8 py-12 mb-8">
             <h2 class="h4 text-center fw-semibold mb-6">30天份自由配</h2>

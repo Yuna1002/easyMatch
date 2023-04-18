@@ -1,55 +1,57 @@
-<template>
-  <header class="sticky-top">
-    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
-      <div class="container ">
-        <a class="navbar-brand " href="/">
-          <img src="../assets/images/logo-01.png" alt="logo"  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
-        ><a class="navbar-brand" href="#" style="font-family:Josefin Sans">EASY MATCH</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="navbarNav" >
-          <ul class="navbar-nav ms-auto d-flex align-items-center " >
-            <li class="nav-item me-lg-9">
-              <RouterLink to="/" class="nav-link">首頁 </RouterLink>
-            </li>
-            <li class="nav-item me-lg-9 ">
-              <RouterLink to="/products" class="nav-link ">所有產品</RouterLink>
-            </li>
-            <li class="nav-item ">
-              <RouterLink
-                to="/cart"
-                class="nav-link  position-relative p-0 "
-              >
-              <p v-if="openNav===true" class=" py-2">購物車</p>
-              <div class="d-flex" v-else>
-                <span class="material-symbols-outlined"> shopping_cart </span>
-                <span
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
+<template >
+  <div class="wrapper">
+    <header class="sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
+        <div class="container ">
+          <a class="navbar-brand " href="/">
+            <img src="../assets/images/logo-01.png" alt="logo"  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
+          ><a class="navbar-brand" href="#" style="font-family:Josefin Sans">EASY MATCH</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse " id="navbarNav" >
+            <ul class="navbar-nav ms-auto d-flex align-items-center " >
+              <li class="nav-item me-lg-9">
+                <RouterLink to="/" class="nav-link">首頁 </RouterLink>
+              </li>
+              <li class="nav-item me-lg-9 ">
+                <RouterLink to="/products" class="nav-link ">所有產品</RouterLink>
+              </li>
+              <li class="nav-item ">
+                <RouterLink
+                  to="/cart"
+                  class="nav-link  position-relative p-0 "
                 >
-                  {{ cartNum }}
-                </span>
-              </div>    
-              </RouterLink>
-            </li>
-          </ul>
+                <p v-if="openNav===true" class=" py-2">購物車</p>
+                <div class="d-flex" v-else>
+                  <span class="material-symbols-outlined"> shopping_cart </span>
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
+                  >
+                    {{ cartNum }}
+                  </span>
+                </div>    
+                </RouterLink>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
-  <RouterView />
-  <footer class="bg-primary-200 py-10 ">
-    <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
-    <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
-  </footer>
+      </nav>
+    </header>
+    <RouterView class="min-vh-100"/>
+    <footer class="bg-primary-200 py-10 footer">
+      <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
+      <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -115,17 +117,7 @@ export default {
 </script>
 
 <style>
-  /* .wrapper {
-    box-sizing: border-box;
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
+  .wrapper {
+    min-height: calc(100% - 136px);
   }
-  .page-header, .page-footer {
-    flex-grow: 0;
-    flex-shrink: 0;
-  }
-  .page-body {
-    flex-grow: 1;
-  } */
 </style>
