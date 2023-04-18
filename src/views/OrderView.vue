@@ -167,12 +167,6 @@ export default {
   },
   methods: {
     ...mapActions(cartStore, ['getCart']),
-    scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
     submitOrder() {
       const data = this.form
       this.$http
@@ -191,7 +185,7 @@ export default {
           //將總計金額(*group)存在localStorage
           localStorage.setItem('totalIncludeGroup',this.cart.total*this.cart.group)
           this.orderId = res.data.orderId;
-          this.$router.push(`/orderPay/${this.orderId}`,this.scrollToTop());
+          this.$router.push(`/orderPay/${this.orderId}`);
 
         })
         .catch((err) => {

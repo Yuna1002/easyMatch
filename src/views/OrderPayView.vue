@@ -121,21 +121,13 @@ export default{
                 this.order.totalIncludeGroup = parseInt(savedOption)
             }
             loader.hide()
-        })
-        
+        })        
        },
-       scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
        payOrder(orderId){
         this.$http
           .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/pay/${orderId}`)
           .then((res) => {
-            if (res.data.success) {
-              
+            if (res.data.success) { 
                 Swal.fire({ 
                     icon: 'success',
                     toast: true,
@@ -145,11 +137,9 @@ export default{
                     showConfirmButton: false,
                 })
                 this.getOrder();
-                this.scrollToTop();
             }
           })
        }
-
     },
     mounted() { 
         const loader = this.$loading.show()  

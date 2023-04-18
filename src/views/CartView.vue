@@ -101,12 +101,6 @@ export default {
     ...mapActions(cartStore, ['getCart']),
     ...mapActions(cartStore, ['delCart']),
     ...mapActions(cartStore, ['saveToLocal']),
-    scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    },
     checkCart(){
       if(!this.cart.carts.length){
         Swal.fire({
@@ -121,7 +115,7 @@ export default {
             }
           })
       }else{
-        this.$router.push('/order', this.scrollToTop())
+        this.$router.push('/order')
       }
     }
   },
