@@ -10,7 +10,7 @@ import router from './router'
 import './assets/all.scss'
 import 'bootstrap';
 import 'animate.css';
-import { date, toThousands,scrollToTop } from './methods/filters'
+import { date, toThousands } from './methods/filters'
 
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 import AllRules from '@vee-validate/rules'
@@ -35,10 +35,8 @@ const app = createApp(App)
 
 app.config.globalProperties.$filters = {
   date,
-  toThousands,
-  
+  toThousands, 
 }
-app.provide('scrollToTop', scrollToTop)
 
 app.use(createPinia())
 app.use(router)

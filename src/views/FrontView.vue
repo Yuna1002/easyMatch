@@ -1,5 +1,5 @@
-<template class="wrapper">
-  <header class="sticky-top page-header">
+<template>
+  <header class="sticky-top">
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
       <div class="container ">
         <a class="navbar-brand " href="/">
@@ -45,8 +45,8 @@
       </div>
     </nav>
   </header>
-  <RouterView class="page-body"/>
-  <footer class="bg-primary-200 py-10 page-footer">
+  <RouterView />
+  <footer class="bg-primary-200 py-10 ">
     <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
     <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
   </footer>
@@ -115,7 +115,7 @@ export default {
 </script>
 
 <style>
-  .wrapper {
+  /* .wrapper {
     box-sizing: border-box;
     min-height: 100%;
     display: flex;
@@ -127,5 +127,5 @@ export default {
   }
   .page-body {
     flex-grow: 1;
-  }
+  } */
 </style>
