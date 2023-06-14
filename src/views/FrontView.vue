@@ -1,11 +1,20 @@
-<template >
+<template>
   <div class="wrapper">
     <header class="sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #71dacc">
-        <div class="container ">
-          <a class="navbar-brand " href="#">
-            <img src="../assets/images/logo-01.png" alt="logo"  class="d-inline-block align-text-top img-fluid" width="40"  /> </a
-          ><a class="navbar-brand" href="#" style="font-family:Josefin Sans">EASY MATCH</a>
+      <nav
+        class="navbar navbar-expand-lg navbar-dark"
+        style="background-color: #71dacc"
+        :class="{ 'fixed-navbar': openNav }"
+      >
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <img
+              src="../assets/images/logo-01.png"
+              alt="logo"
+              class="d-inline-block align-text-top img-fluid"
+              width="40"
+            /> </a
+          ><a class="navbar-brand" href="#" style="font-family: Josefin Sans">EASY MATCH</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -17,28 +26,25 @@
           >
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse " id="navbarNav" >
-            <ul class="navbar-nav ms-auto d-flex align-items-center " >
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto d-flex align-items-center">
               <li class="nav-item me-lg-9">
                 <RouterLink to="/" class="nav-link">首頁 </RouterLink>
               </li>
-              <li class="nav-item me-lg-9 ">
-                <RouterLink to="/products" class="nav-link ">所有產品</RouterLink>
+              <li class="nav-item me-lg-9">
+                <RouterLink to="/products" class="nav-link">所有產品</RouterLink>
               </li>
-              <li class="nav-item ">
-                <RouterLink
-                  to="/cart"
-                  class="nav-link  position-relative p-0 "
-                >
-                <p v-if="openNav===true" class=" py-2">購物車</p>
-                <div class="d-flex" v-else>
-                  <span class="material-symbols-outlined"> shopping_cart </span>
-                  <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
-                  >
-                    {{ cartNum }}
-                  </span>
-                </div>    
+              <li class="nav-item">
+                <RouterLink to="/cart" class="nav-link position-relative p-0">
+                  <p v-if="openNav === true" class="py-2">購物車</p>
+                  <div class="d-flex" v-else>
+                    <span class="material-symbols-outlined"> shopping_cart </span>
+                    <span
+                      class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
+                    >
+                      {{ cartNum }}
+                    </span>
+                  </div>
                 </RouterLink>
               </li>
             </ul>
@@ -46,9 +52,9 @@
         </div>
       </nav>
     </header>
-    <div class="min-vh-100 bg-tertiary-100">
-      <RouterView />
-    </div> 
+    <div class="min-vh-100 bg-tertiary-100 border">
+      <RouterView class="mt-20" />
+    </div>
     <footer class="bg-primary-200 py-10 footer">
       <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
       <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
@@ -61,10 +67,10 @@ import { RouterView, RouterLink } from 'vue-router'
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 export default {
-  data(){
-    return{
-      openNav:false,
-      windowWidth:window.innerWidth,
+  data() {
+    return {
+      openNav: false,
+      windowWidth: window.innerWidth
     }
   },
   components: {
@@ -74,52 +80,58 @@ export default {
   computed: {
     ...mapState(cartStore, ['cartNum'])
   },
-  watch:{
-    windowWidth(){
-      if(this.windowWidth>991){
-        this.openNav=false
-      }else{
-        this.openNav=true
-      }
-    }
+  watch: {
+    // windowWidth() {
+    //   console.log(1)
+    //   if (this.windowWidth > 991) {
+    //     this.openNav = false
+    //   } else {
+    //     this.openNav = true
+    //   }
+    // }
   },
   methods: {
     ...mapActions(cartStore, ['getCart']),
     onResize() {
+      console.log(2)
       this.windowWidth = window.innerWidth
-      if(this.windowWidth>991){
-        this.openNav=false
-      }else{
-        this.openNav=true
+      if (this.windowWidth > 991) {
+        this.openNav = false
+      } else {
+        this.openNav = true
       }
     },
     navbarCollapse() {
-      const navLink = document.querySelectorAll('.nav-link');
-      const navbarCollapse = document.querySelector('.navbar-collapse');
+      const navLink = document.querySelectorAll('.nav-link')
+      const navbarCollapse = document.querySelector('.navbar-collapse')
       navLink.forEach((item) => {
         item.addEventListener('click', () => {
-          navbarCollapse.classList.remove('show');
-        });
-      });
-    },
+          navbarCollapse.classList.remove('show')
+        })
+      })
+    }
   },
   mounted() {
     this.getCart()
-    this.navbarCollapse();
+    this.navbarCollapse()
     this.$nextTick(() => {
-      window.addEventListener('resize', this.onResize);
+      window.addEventListener('resize', this.onResize)
     })
-    this.onResize();
-    
+    //this.onResize()
   },
-  beforeUnmount(){
-    window.removeEventListener('resize', this.onResize); 
+  unmounted() {
+    window.removeEventListener('resize', this.onResize)
   }
 }
 </script>
 
 <style>
-  .wrapper {
-    min-height: calc(100% - 136px);
-  }
+.wrapper {
+  min-height: calc(100% - 136px);
+}
+.fixed-navbar {
+  width: 100%;
+  position: absolute;
+  z-index: 999;
+}
 </style>

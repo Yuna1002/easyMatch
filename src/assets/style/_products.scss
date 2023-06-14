@@ -1,30 +1,29 @@
 .sidebar-link {
-    background-color: transparent;
-    border: transparent;
-    &-active {
-      border-bottom: 3px solid $primary;
-      color: $primary-200;
-      pointer-events: none;
-      @include md{
+  background-color: transparent;
+  border: transparent;
+  &-active {
+    border-bottom: 3px solid $primary;
+    color: $primary-200;
+    pointer-events: none;
+    @include md {
       padding-left: 13px;
       border-left: 3px solid $primary;
       border-bottom: none;
-      }
     }
   }
-.sidebar-position{
+}
+.sidebar-position {
   position: sticky;
   top: 68.5px;
-  z-index: 1020;
-  
-  @include md{
+  z-index: 1;
+
+  @include md {
     position: sticky;
-    top:100px;
+    top: 100px;
     z-index: 0;
-    
   }
 }
-  
+
 .products-card {
   color: $dark;
   &:hover {
@@ -33,8 +32,8 @@
     transition: 0.3s;
   }
 }
-.toast-position{
+.toast-position {
   position: sticky;
-  top:56px;
+  top: 56px;
   z-index: 1;
 }

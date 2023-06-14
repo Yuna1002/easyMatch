@@ -1,11 +1,13 @@
 <template>
   <div class="bg-tertiary-100">
-  <SuccessToast/>
-    <div class="container pt-12 pb-40">
+    <SuccessToast />
+    <div class="container pt-md-12 pt-lg-0 pb-40">
       <div class="row">
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
-          <div class="list-group d-flex justify-content-center flex-row flex-md-column pt-4 bg-tertiary-100 rounded-0  sidebar-position">
+          <div
+            class="list-group d-flex justify-content-center flex-row flex-md-column pt-4 bg-tertiary-100 rounded-0 sidebar-position"
+          >
             <h2 class="fs-4 ps-md-8 mb-6">
               <a
                 href=""
@@ -27,7 +29,7 @@
                 維生素
               </a>
             </h2>
-            <h2 class="fs-4 ps-3 ps-md-8  mb-6">
+            <h2 class="fs-4 ps-3 ps-md-8 mb-6">
               <a
                 href=""
                 class="list-group-item sidebar-link text-nowrap"
@@ -50,9 +52,13 @@
           </div>
         </div>
         <!-- 產品列表 -->
-        <div class="col-md-9 vl-parent" ref="productsContainer">          
-          <div class="row justify-content-center justify-content-lg-start" >
-            <div class="col-10 col-sm-12 col-xl-4 col-lg-6 mb-6" v-for="product in filterProducts" :key="product.id">
+        <div class="col-md-9 vl-parent" ref="productsContainer">
+          <div class="row justify-content-center justify-content-lg-start">
+            <div
+              class="col-10 col-sm-12 col-xl-4 col-lg-6 mb-6"
+              v-for="product in filterProducts"
+              :key="product.id"
+            >
               <a
                 href=""
                 class="card bg-card-bg border-0 h-100 pb-5 products-card"
@@ -95,10 +101,8 @@
                     class="btn btn-primary-200 text-white"
                     :disabled="loadingItem === product.id"
                   >
-                  <i
-                    class="fas fa-spinner fa-pulse"
-                    v-if="product.id === loadingItem"
-                  ></i>加入購物車
+                    <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i
+                    >加入購物車
                   </button>
                 </div>
               </a>
@@ -122,11 +126,11 @@ export default {
       filterProducts: [],
       tempProduct: {},
       active: '全部',
-      fullPage: false,
+      fullPage: false
     }
   },
   components: {
-    SuccessToast,
+    SuccessToast
   },
   methods: {
     getProducts() {
@@ -162,14 +166,14 @@ export default {
       }
     },
     ...mapActions(cartStore, ['getCart']),
-    ...mapActions(cartStore, ['addToCart']),
+    ...mapActions(cartStore, ['addToCart'])
   },
   computed: {
     ...mapState(cartStore, ['cart']),
-    ...mapState(cartStore, ['loadingItem']),
+    ...mapState(cartStore, ['loadingItem'])
   },
   mounted() {
-   this.getProducts();
+    this.getProducts()
   }
 }
 </script>

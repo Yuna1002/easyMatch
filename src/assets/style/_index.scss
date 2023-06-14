@@ -2,72 +2,79 @@
 //     position: sticky;
 //     top: 0;
 // }
-.banner{
-    background-color:$primary ;
-    background-image: url(../assets/images/bg_mobile.png);
-    background-size: cover;
-    height: calc(100vh - 56px);
-    background-position: center;
-    @include md{
-        background-image: url(../assets/images/bg_desktop.png);
-    }
-  
+.banner {
+  background-color: $primary;
+  background-image: url(../assets/images/bg_mobile.png);
+  background-size: cover;
+  //height: calc(100vh - 56px);
+  height: 100vh;
+  background-position: center;
+  @include md {
+    background-image: url(../assets/images/bg_desktop.png);
   }
-.bg-3{
-    background-color:$tertiary-100 ;
-    background-image: url(../assets/images/bg.png);
-    background-attachment: fixed;
 }
-.btn-hover{
-    &:hover{
-        box-shadow: 0 8px 1px $primary-400;
-    }
+.bg-3 {
+  background-color: $tertiary-100;
+  background-image: url(../assets/images/bg.png);
+  background-attachment: fixed;
+}
+.btn-hover {
+  &:hover {
+    box-shadow: 0 8px 1px $primary-400;
+  }
 }
 .my-element {
-    animation: shakeY; /* referring directly to the animation's @keyframe declaration */
-    --animate-duration: 10s; /* don't forget to set a duration! */
-  }
+  animation: shakeY; /* referring directly to the animation's @keyframe declaration */
+  --animate-duration: 10s; /* don't forget to set a duration! */
+}
 
+.mobile-element {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-.mobile-element{
-    position: absolute;
-    top:100%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    
-    animation-name:upDown;
-    animation-duration:3s;  
-    animation-iteration-count: infinite;
+  animation-name: upDown;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
 }
 @keyframes upDown {
-    0%   {left:50%; top:100%;}
-    50%  {left:50%; top:95%;}
-    100% {left:50%; top:100%;}
-  } 
-.arrow-right{
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+  0% {
+    left: 50%;
+    top: 100%;
+  }
+  50% {
+    left: 50%;
+    top: 95%;
+  }
+  100% {
+    left: 50%;
+    top: 100%;
+  }
 }
-.arrow-left{
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
+.arrow-right {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
-.img-radius{
+.arrow-left {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+}
+.img-radius {
   border-radius: 8px 8px 0 0;
 }
-.icon-position{
-    position: absolute;
-    top:30%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition:all 0.5s ease-in-out ;
-    &-hover{
-        top:0;
-        transition:all 0.5s ease-in-out ;
-        opacity: 100%;
-    }
-    
+.icon-position {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  &-hover {
+    top: 0;
+    transition: all 0.5s ease-in-out;
+    opacity: 100%;
+  }
 }
