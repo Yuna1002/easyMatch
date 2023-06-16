@@ -1,13 +1,8 @@
-// .header-sticky{
-//     position: sticky;
-//     top: 0;
-// }
 .banner {
   background-color: $primary;
   background-image: url(../assets/images/bg_mobile.png);
   background-size: cover;
-  //height: calc(100vh - 56px);
-  height: 100vh;
+  height: calc(100vh - 60px);
   background-position: center;
   @include md {
     background-image: url(../assets/images/bg_desktop.png);

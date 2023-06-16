@@ -1,12 +1,12 @@
 <template>
   <div class="bg-tertiary-100">
     <SuccessToast />
-    <div class="container pt-md-12 pt-lg-0 pb-40">
+    <div class="container pt-lg-0 pb-40">
       <div class="row">
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
           <div
-            class="list-group d-flex justify-content-center flex-row flex-md-column pt-4 bg-tertiary-100 rounded-0 sidebar-position"
+            class="list-group d-flex justify-content-center flex-row flex-md-column bg-tertiary-100 rounded-0 sidebar-position"
           >
             <h2 class="fs-4 ps-md-8 mb-6">
               <a
