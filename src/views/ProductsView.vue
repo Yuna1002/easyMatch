@@ -6,7 +6,7 @@
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
           <div
-            class="list-group d-flex justify-content-center flex-row flex-md-column bg-tertiary-100 rounded-0 sidebar-position"
+            class="list-group d-flex justify-content-center flex-row flex-md-column bg-tertiary-100 rounded-0 sidebar-position overflow-auto"
           >
             <h2 class="fs-4 ps-md-8 mb-6">
               <a
@@ -18,7 +18,7 @@
                 全部產品
               </a>
             </h2>
-            <h2 class="fs-4 ps-3 ps-md-8 mb-6">
+            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
               <a
                 href=""
                 class="list-group-item sidebar-link text-nowrap"
@@ -29,7 +29,7 @@
                 維生素
               </a>
             </h2>
-            <h2 class="fs-4 ps-3 ps-md-8 mb-6">
+            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
               <a
                 href=""
                 class="list-group-item sidebar-link text-nowrap"
@@ -39,7 +39,7 @@
                 礦物質
               </a>
             </h2>
-            <h2 class="fs-4 ps-3 ps-md-8 mb-6">
+            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
               <a
                 href=""
                 class="list-group-item sidebar-link text-nowrap"
@@ -177,3 +177,10 @@ export default {
   }
 }
 </script>
+
+<style>
+/* 隱藏滾動條 */
+::-webkit-scrollbar {
+  display: none;
+}
+</style>

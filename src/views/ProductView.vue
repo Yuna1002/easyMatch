@@ -1,18 +1,22 @@
 <template>
-  <div class="container pt-12 pb-40">
+  <div class="container pt-20 pt-md-30 pb-40">
     <!-- 麵包屑 -->
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><RouterLink to="/" class="text-primary-200">首頁</RouterLink></li>
-          <li class="breadcrumb-item"><RouterLink to="/products" class="text-primary-200">所有產品</RouterLink></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
-        </ol>
-        </nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <RouterLink to="/" class="text-primary-200">首頁</RouterLink>
+        </li>
+        <li class="breadcrumb-item">
+          <RouterLink to="/products" class="text-primary-200">所有產品</RouterLink>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+      </ol>
+    </nav>
     <div class="row pb-12">
-      <div class="col-md-6">        
+      <div class="col-md-6 mb-5 mb-md-0">
         <img class="img-fluid" :src="product.imageUrl" :alt="product.title" />
       </div>
-      <div class="col-md-6">        
+      <div class="col-md-6">
         <div class="d-flex align-items-center mb-6">
           <h1 class="h2 fw-bold mb-0">
             {{ product.title }}
@@ -38,22 +42,16 @@
           type="button"
           class="btn btn-primary-200 text-white py-2 px-19"
           @click="addToCart(product.id, qty)"
-        ><i
-            class="fas fa-spinner fa-pulse"
-            v-if="product.id === loadingItem"
-          ></i>
+        >
+          <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i>
           加入購物車
         </button>
       </div>
     </div>
-    <hr class="mb-6" />
-    <ul class="list-unstyled d-flex justify-content-center mb-8">
-      <li class="me-8 pb-2 px-3 ">
-        <a href="" class="text-dark fw-semibold fs-5" >產品說明</a>
-      </li>
-    </ul>
+    <hr class="mb-9" />
+    <h2 class="h3 text-center mb-8">產品說明</h2>
     <div class="tab-content">
-      <div >
+      <div>
         <div class="mb-7">
           <h3 class="h6 fw-semibold">產品保健</h3>
           <p>{{ product.description }}</p>
@@ -114,10 +112,10 @@ const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
     return {
-      product: {},
+      product: {}
     }
   },
-  components:{
+  components: {
     RouterLink
   },
   methods: {
@@ -139,7 +137,7 @@ export default {
   },
   computed: {
     ...mapState(cartStore, ['cart']),
-    ...mapState(cartStore, ['loadingItem']),
+    ...mapState(cartStore, ['loadingItem'])
   },
   mounted() {
     this.getProduct()

@@ -3,16 +3,16 @@
     <div class="container pb-40">
       <h1 class="h2 text-center mb-8">購物車</h1>
       <div class="row justify-content-center">
-        <div class="col-10">
+        <div class="col-md-10">
           <div class="bg-card-bg px-8 py-12 mb-8">
             <h2 class="h4 text-center fw-semibold mb-6">30天份自由配</h2>
             <table class="table align-middle border">
               <thead class="bg-primary text-white">
                 <tr>
                   <th class="fw-semibold align-middle">產品</th>
-                  <th class="w-semibold text-center align-middle">每顆單價</th>
-                  <th class="w-semibold text-center align-middle">30天份金額</th>
-                  <th class="w-semibold"></th>
+                  <th class="fw-semibold text-center align-middle">單價</th>
+                  <th class="fw-semibold text-center align-middle">30天份金額</th>
+                  <th class="fw-semibold"></th>
                 </tr>
               </thead>
               <tbody v-if="Array.isArray(cart.carts)">

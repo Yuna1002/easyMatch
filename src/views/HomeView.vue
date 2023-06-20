@@ -215,12 +215,12 @@
     </div>
   </section>
   <!-- 好評回饋 -->
-  <section class="bg-tertiary-100">
-    <div class="container pt-30 pb-40">
+  <section class="bg-tertiary-100 pt-30 pb-40">
+    <div class="container">
       <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-20 d-lg-none">好評回饋</h2>
       <div class="row flex-nowrap align-items-center">
         <div class="col-lg-3 d-none d-lg-block">
-          <div class="card bg-primary border-0 rounded-4 d-none d-lg-block py-40 px-6">
+          <div class="card bg-primary border-0 rounded-4 d-none d-lg-block py-30 px-6">
             <img
               src="../assets/images/commentIcon.svg"
               class="d-block card-img-top mb-11 mx-auto animate__animated animate__shakeX animate__delay-4s animate__repeat-3"
