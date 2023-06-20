@@ -2,7 +2,7 @@
   background-color: $primary;
   background-image: url(../assets/images/bg_mobile.png);
   background-size: cover;
-  height: calc(100vh - 60px);
+  height: 100vh;
   background-position: center;
   @include md {
     background-image: url(../assets/images/bg_desktop.png);

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-tertiary-100">
+  <div class="bg-tertiary-100 pt-30">
     <div class="container pb-40">
       <h1 class="h2 text-center mb-8">購物車</h1>
       <div class="row justify-content-center">

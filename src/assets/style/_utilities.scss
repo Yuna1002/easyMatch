@@ -1,25 +1,17 @@
 $utilities: map-merge(
   $utilities,
   (
-    "font-size":
+    'font-size':
       map-merge(
-        map-get($utilities, "font-size"),
+        map-get($utilities, 'font-size'),
         (
           responsive: true,
-          rfs: false,
+          rfs: false
         )
-      ),
+      )
   )
 );
-
-
-
 
 .tab-active {
   border-bottom: 4px solid $primary;
 }
-// .nav-position{
-//   position: fixed;
-//   top: 56px;
-//   z-index: 1030;
-// }

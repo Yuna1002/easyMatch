@@ -9,7 +9,7 @@
         src="../assets/images/Left_pill.svg"
         alt="藥丸圖片"
       />
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column align-items-center pt-md-20">
         <h1
           class="text-white text-center fs-lg-lg fs-md-md fs-14 mb-4"
           style="font-family: Josefin Sans"

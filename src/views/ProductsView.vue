@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-tertiary-100">
+  <div class="bg-tertiary-100 pt-20 pt-md-30">
     <SuccessToast />
     <div class="container pt-lg-0 pb-40">
       <div class="row">

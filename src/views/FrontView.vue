@@ -1,7 +1,10 @@
 <template>
   <div class="wrapper">
     <header class="sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #71dacc">
+      <nav
+        class="navbar navbar-expand-lg navbar-dark fixed-navbar"
+        style="background-color: #71dacc"
+      >
         <div class="container position-relative">
           <a class="navbar-brand" href="#">
             <img
@@ -59,7 +62,7 @@
       </nav>
     </header>
     <div class="min-vh-100 bg-tertiary-100">
-      <RouterView class="pt-20" />
+      <RouterView />
     </div>
     <footer class="bg-primary-200 py-10 footer">
       <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
