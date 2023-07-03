@@ -239,6 +239,7 @@
       </div>
     </div>
   </section>
+  <GotopBtn />
 </template>
 
 <script>
@@ -246,8 +247,10 @@ import { RouterLink } from 'vue-router'
 import HotProductsSwiper from '../components/HotProductsSwiper.vue'
 import CommentSwiper from '../components/CommentSwiper.vue'
 import SuccessToast from '../components/SuccessToast.vue'
+import GotopBtn from '../components/GotopBtn.vue'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+
 export default {
   data() {
     return {
@@ -259,8 +262,10 @@ export default {
     RouterLink,
     HotProductsSwiper,
     CommentSwiper,
-    SuccessToast
+    SuccessToast,
+    GotopBtn
   },
+
   mounted() {
     AOS.init({
       offset: 100,
