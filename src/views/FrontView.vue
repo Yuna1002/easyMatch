@@ -44,6 +44,9 @@
                 <RouterLink to="/products" class="nav-link">所有產品</RouterLink>
               </li>
               <li class="nav-item ms-lg-9">
+                <RouterLink to="/qa" class="nav-link">常見問題</RouterLink>
+              </li>
+              <li class="nav-item ms-lg-9">
                 <RouterLink to="/cart" class="nav-link position-relative d-lg-none">
                   購物車
                 </RouterLink>

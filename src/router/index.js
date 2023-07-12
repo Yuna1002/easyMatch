@@ -22,7 +22,7 @@ const router = createRouter({
           path: 'cart',
           component: () => import('../views/CartView.vue')
         },
-       
+
         {
           path: 'order',
           component: () => import('../views/OrderView.vue')
@@ -31,19 +31,24 @@ const router = createRouter({
           path: 'orderPay/:orderId',
           component: () => import('../views/OrderPayView.vue')
         },
-      
-        
+        {
+          path: 'qa',
+          component: () => import('../views/QaView.vue')
+        }
       ]
     },
     {
       path: '/:pathMatch(.*)*',
-      component: () => import('../views/NotFound.vue'),
-    },
+      component: () => import('../views/NotFound.vue')
+    }
   ],
-  scrollBehavior (to, from, savedPosition) {
-    return savedPosition || new Promise((resolve) => {
-      resolve({ top: 0, behavior: 'smooth' })
-    })
+  scrollBehavior(to, from, savedPosition) {
+    return (
+      savedPosition ||
+      new Promise((resolve) => {
+        resolve({ top: 0, behavior: 'smooth' })
+      })
+    )
   }
 })
 export default router

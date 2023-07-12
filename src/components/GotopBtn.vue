@@ -23,9 +23,9 @@ export default {
       console.log('123')
       // 判斷滾動位置是否超過閾值，顯示或隱藏按鈕
       if (window.pageYOffset > 0) {
-        floatButton.classList.add('opacity-100')
+        floatButton?.classList?.add('opacity-100')
       } else {
-        floatButton.classList.remove('opacity-100')
+        floatButton?.classList?.remove('opacity-100')
       }
     }
   },
