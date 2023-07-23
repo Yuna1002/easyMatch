@@ -13,6 +13,7 @@ export const productsStore = defineStore('product', {
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products/all`)
         .then((res) => {
           this.productsAll = res.data.products
+          console.log('成功取的所有產品')
         })
         .catch((err) => {
           alert(err.data.message)

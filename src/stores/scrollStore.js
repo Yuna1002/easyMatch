@@ -7,7 +7,6 @@ export const scrollStore = defineStore('scroll', {
   },
   actions: {
     scrollToTop() {
-      console.log('goTop')
       window.scrollTo({
         top: this.scrollPosition,
         behavior: 'smooth'

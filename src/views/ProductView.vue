@@ -1,105 +1,112 @@
 <template>
-  <div class="container pt-20 pt-md-30 pb-40">
-    <!-- 麵包屑 -->
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <RouterLink to="/" class="text-primary-200">首頁</RouterLink>
-        </li>
-        <li class="breadcrumb-item">
-          <RouterLink to="/products" class="text-primary-200">所有產品</RouterLink>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
-      </ol>
-    </nav>
-    <div class="row pb-12">
-      <div class="col-md-6 mb-5 mb-md-0">
-        <img class="img-fluid" :src="product.imageUrl" :alt="product.title" />
-      </div>
-      <div class="col-md-6">
-        <div class="d-flex align-items-center mb-6">
-          <h1 class="h2 fw-bold mb-0">
-            {{ product.title }}
-          </h1>
+  <div class="container pt-20 pt-md-22 pb-10">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <!-- 麵包屑 -->
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <RouterLink to="/" class="text-primary-200">首頁</RouterLink>
+            </li>
+            <li class="breadcrumb-item">
+              <RouterLink to="/products" class="text-primary-200">所有產品</RouterLink>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+          </ol>
+        </nav>
+        <div class="row pb-12">
+          <div class="col-md-6 mb-5 mb-md-0">
+            <img class="img-fluid" :src="product.imageUrl" :alt="product.title" />
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex align-items-center mb-6">
+              <h1 class="h2 fw-bold mb-0">
+                {{ product.title }}
+              </h1>
+              <div>
+                <span class="badge bg-primary rounded-pill ms-2">{{ product.category }}</span>
+              </div>
+            </div>
+            <p class="mb-6">{{ product.description }}</p>
+            <p class="fs-6 fw-semibold text-primary-200 mb-6">
+              {{ `NT$${product.price} ` }}
+              <span class="fs-4">/顆</span>
+            </p>
+            <button
+              type="button"
+              class="btn btn-secondary text-white disabled py-2 px-20"
+              v-if="cart.carts?.some((item) => item.product_id === product.id)"
+            >
+              已加入
+            </button>
+            <button
+              v-else
+              type="button"
+              class="btn btn-primary-200 text-white py-2 px-19"
+              @click="addToCart(product.id, qty)"
+            >
+              <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i>
+              加入購物車
+            </button>
+          </div>
+        </div>
+        <hr class="mb-9" />
+        <h2 class="h3 text-center mb-8">產品說明</h2>
+        <div class="tab-content mb-15">
           <div>
-            <span class="badge bg-primary rounded-pill ms-2">{{ product.category }}</span>
+            <div class="mb-7">
+              <h3 class="h6 fw-semibold">產品保健</h3>
+              <p>{{ product.description }}</p>
+            </div>
+            <div class="mb-7">
+              <h3 class="h6 fw-semibold">說明內容</h3>
+              <p>{{ product.content }}</p>
+            </div>
+            <div class="mb-7">
+              <h3 class="h6 fw-semibold">食用方法</h3>
+              <p>{{ product.食用方法 }}</p>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th class="ps-0 border-0 mb-2">營養標示</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>每一份量</td>
+                      <td class="text-center">1顆</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="border-0 pb-0"></td>
+                      <td class="border-0 pb-0 text-center">每份</td>
+                      <td class="border-0 pb-0 text-center">每日參考值百分比%</td>
+                    </tr>
+                    <tr v-if="product.element">
+                      <td>{{ product.element.title }}</td>
+                      <td class="text-center">{{ product.element.quantity }}</td>
+                      <td class="text-center">{{ product.element.percent }}</td>
+                    </tr>
+                    <!-- v-if="Array.isArray(product.elements)" -->
+                    <tr v-for="(i, index) in product.elements" :key="index">
+                      <td>{{ i.title }}</td>
+                      <td class="text-center">{{ i.quantity }}</td>
+                      <td class="text-center">{{ i.percent }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          <!-- <div v-if="activeTab === 2">產品評價</div> -->
         </div>
-        <p class="mb-6">{{ product.description }}</p>
-        <p class="fs-6 fw-semibold text-primary-200 mb-6">
-          {{ `NT$${product.price} ` }}
-          <span class="fs-4">/顆</span>
-        </p>
-        <button
-          type="button"
-          class="btn btn-secondary text-white disabled py-2 px-20"
-          v-if="cart.carts?.some((item) => item.product_id === product.id)"
-        >
-          已加入
-        </button>
-        <button
-          v-else
-          type="button"
-          class="btn btn-primary-200 text-white py-2 px-19"
-          @click="addToCart(product.id, qty)"
-        >
-          <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i>
-          加入購物車
-        </button>
+        <!-- 產品推薦 -->
+        <h2 class="h3 text-center mb-8">產品推薦</h2>
+        <CategorySwiper :product="product" @get-product="getProduct"></CategorySwiper>
       </div>
-    </div>
-    <hr class="mb-9" />
-    <h2 class="h3 text-center mb-8">產品說明</h2>
-    <div class="tab-content">
-      <div>
-        <div class="mb-7">
-          <h3 class="h6 fw-semibold">產品保健</h3>
-          <p>{{ product.description }}</p>
-        </div>
-        <div class="mb-7">
-          <h3 class="h6 fw-semibold">說明內容</h3>
-          <p>{{ product.content }}</p>
-        </div>
-        <div class="mb-7">
-          <h3 class="h6 fw-semibold">食用方法</h3>
-          <p>{{ product.食用方法 }}</p>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th class="ps-0 border-0 mb-2">營養標示</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>每一份量</td>
-                  <td class="text-center">1顆</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td class="border-0 pb-0"></td>
-                  <td class="border-0 pb-0 text-center">每份</td>
-                  <td class="border-0 pb-0 text-center">每日參考值百分比%</td>
-                </tr>
-                <tr v-if="product.element">
-                  <td>{{ product.element.title }}</td>
-                  <td class="text-center">{{ product.element.quantity }}</td>
-                  <td class="text-center">{{ product.element.percent }}</td>
-                </tr>
-                <!-- v-if="Array.isArray(product.elements)" -->
-                <tr v-for="(i, index) in product.elements" :key="index">
-                  <td>{{ i.title }}</td>
-                  <td class="text-center">{{ i.quantity }}</td>
-                  <td class="text-center">{{ i.percent }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- <div v-if="activeTab === 2">產品評價</div> -->
     </div>
   </div>
 </template>
@@ -108,6 +115,7 @@
 import { mapActions, mapState } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import { RouterLink } from 'vue-router'
+import CategorySwiper from '../components/CategorySwiper.vue'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -116,11 +124,19 @@ export default {
     }
   },
   components: {
-    RouterLink
+    RouterLink,
+    CategorySwiper
   },
   methods: {
-    getProduct() {
-      const { id } = this.$route.params
+    getProduct(productId) {
+      let id = ''
+      if (productId) {
+        id = productId
+      } else {
+        id = this.$route.params.id
+      }
+      // console.log('123', this.$route)
+      // const { id } = this.$route.params
       const loader = this.$loading.show()
       this.$http
         .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/product/${id}`)
