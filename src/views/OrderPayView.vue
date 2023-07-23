@@ -139,6 +139,8 @@
 <script>
 import Swal from 'sweetalert2'
 import { RouterLink } from 'vue-router'
+import { mapState, mapActions } from 'pinia'
+import { scrollStore } from '../stores/scrollStore'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -150,7 +152,11 @@ export default {
   components: {
     RouterLink
   },
+  computed: {
+    ...mapState(scrollStore, ['scrollPosition'])
+  },
   methods: {
+    ...mapActions(scrollStore, ['scrollToTop']),
     getOrder() {
       const loader = this.$loading.show()
       const { orderId } = this.$route.params
@@ -177,6 +183,7 @@ export default {
             showConfirmButton: false
           })
           this.getOrder()
+          this.scrollToTop()
         }
       })
     }

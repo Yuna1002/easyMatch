@@ -1,8 +1,18 @@
 <template>
-  <div class="bg-tertiary-100 pt-20 pt-md-30">
+  <div class="bg-tertiary-100 pt-20 pt-md-22">
     <SuccessToast />
     <div class="container pt-lg-0 pb-40">
       <div class="row">
+        <!-- 麵包屑 -->
+        <nav aria-label="breadcrumb" class="bg-tertiary-100 mb-9">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <RouterLink to="/" class="text-primary-200">首頁</RouterLink>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">所有產品</li>
+          </ol>
+        </nav>
+
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
           <div
@@ -126,6 +136,7 @@
 import { mapState, mapActions } from 'pinia'
 import { cartStore } from '../stores/cartStore'
 import { productsStore } from '../stores/productsStore'
+import { scrollStore } from '../stores/scrollStore'
 import SuccessToast from '../components/SuccessToast.vue'
 import PaginationComponent from '../components/PaginationComponent.vue'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
@@ -155,6 +166,7 @@ export default {
           this.products = res.data.products
           this.pages = res.data.pagination
           this.filterProducts = this.products
+          this.scrollToTop()
           loader.hide()
         })
         .catch((err) => {
@@ -165,9 +177,11 @@ export default {
       this.active = category
       if (category === '全部') {
         this.getProducts()
+        this.scrollToTop()
         this.filterProducts = this.products
       } else {
         this.getProductsAll()
+        this.scrollToTop()
         const allProducts = this.productsAll
 
         const filter = allProducts.filter((product) => product.category === category)
@@ -183,12 +197,14 @@ export default {
     },
     ...mapActions(productsStore, ['getProductsAll']),
     ...mapActions(cartStore, ['getCart']),
-    ...mapActions(cartStore, ['addToCart'])
+    ...mapActions(cartStore, ['addToCart']),
+    ...mapActions(scrollStore, ['scrollToTop'])
   },
   computed: {
     ...mapState(productsStore, ['productsAll']),
     ...mapState(cartStore, ['cart']),
-    ...mapState(cartStore, ['loadingItem'])
+    ...mapState(cartStore, ['loadingItem']),
+    ...mapState(scrollStore, ['scrollPosition'])
   },
   mounted() {
     this.getProducts()
