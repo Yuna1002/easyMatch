@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-tertiary-100 pt-30">
+  <div class="bg-tertiary-100 pt-22">
     <div class="container">
       <!-- 麵包屑 -->
       <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3 mb-9">
@@ -145,7 +145,9 @@
                   ></textarea>
                 </div>
                 <div class="text-end">
-                  <button type="submit" class="btn btn-primary-200 text-white">送出訂單</button>
+                  <button type="submit" class="btn btn-primary-200 rounded-pill text-white">
+                    送出訂單
+                  </button>
                 </div>
               </v-form>
             </div>

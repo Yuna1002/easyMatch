@@ -50,7 +50,9 @@
                 <tr v-else>
                   <td class="text-center ps-9" colspan="3">
                     購物車尚未有產品
-                    <RouterLink to="/products" class="btn btn-primary-200 py-1 text-white ms-2"
+                    <RouterLink
+                      to="/products"
+                      class="btn btn-primary-200 rounded-pill py-1 text-white ms-2 fs-4"
                       >前往購物</RouterLink
                     >
                   </td>
@@ -84,7 +86,7 @@
           </div>
           <div class="d-flex justify-content-end">
             <a
-              class="btn btn-primary-200 text-white ps-8 pe-6 py-2 d-flex align-items-center"
+              class="btn btn-primary-200 text-white rounded-pill btn-hover ps-8 pe-6 py-3 d-flex align-items-center"
               @click="checkCart"
             >
               前往結帳<span class="material-symbols-outlined fw-semibold"> chevron_right </span>

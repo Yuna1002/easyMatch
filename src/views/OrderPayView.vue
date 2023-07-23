@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-tertiary-100 pt-30">
+  <div class="bg-tertiary-100 pt-22">
     <div class="container bg-tertiary-100">
       <nav aria-label="breadcrumb" class="bg-tertiary-100 pt-3 mb-9">
         <ol class="breadcrumb mb-0">
@@ -10,7 +10,7 @@
         </ol>
       </nav>
       <!-- 進度條 -->
-      <div class="mb-4">
+      <div class="mb-8">
         <!-- timeline -->
         <div class="row">
           <div
@@ -49,10 +49,23 @@
           </div>
         </div>
       </div>
+      <!-- 付款完成訊息 -->
+      <div v-if="order.is_paid" class="d-flex flex-column align-items-center mb-15">
+        <p class="fs-10 fw-bold">感謝您的購買!</p>
+        <p class="mb-9 fs-5">我們將盡快為您出貨，還請隨時留意宅配通知！</p>
+        <div>
+          <RouterLink to="/" class="btn btn-outline-primary-200 rounded-pill py-3 px-7 me-6"
+            >回首頁</RouterLink
+          >
+          <RouterLink to="/products" class="btn btn-primary-200 rounded-pill py-3 px-7 text-white"
+            >繼續購物</RouterLink
+          >
+        </div>
+      </div>
       <!-- 訂單資訊 -->
       <div class="row justify-content-center pb-40">
         <div class="col-10 col-md-8">
-          <div class="bg-card-bg p-6">
+          <div class="bg-card-bg p-6 w-100 mb-9">
             <h2 class="h4">訂單資訊</h2>
             <form @submit.prevent="payOrder(order.id)">
               <table class="table align-middle">
@@ -72,40 +85,46 @@
                       NT$ {{ $filters.toThousands(order.totalIncludeGroup) }}
                     </td>
                   </tr>
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th class="p-md-3 border-0">姓名</th>
                     <td class="p-md-3 border-0">{{ order.user?.name }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th class="p-md-3 border-0">手機</th>
                     <td class="p-md-3 border-0">{{ order.user?.tel }}</td>
                   </tr>
 
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th class="p-md-3 border-0">信箱</th>
                     <td class="p-md-3 border-0">{{ order.user?.email }}</td>
                   </tr>
 
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th class="p-md-3 border-0">外送地址</th>
                     <td class="p-md-3 border-0">{{ order.user?.address }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th class="p-md-3 border-0">訂單備註</th>
                     <td class="p-md-3 border-0">{{ order.message ? order.message : '無' }}</td>
                   </tr>
-                  <tr>
+                  <tr v-if="!order.is_paid">
                     <th scope="row" class="p-md-3 border-0" width="150">付款狀態</th>
                     <td class="p-md-3 border-0">
-                      <span class="badge bg-danger py-2 px-4" v-if="!order.is_paid">尚未付款</span>
-                      <span class="badge bg-primary-200 py-2 px-4" v-else>已付款</span>
+                      <span class="badge bg-danger rounded-pill py-2 px-4" v-if="!order.is_paid"
+                        >尚未付款</span
+                      >
+                      <!-- <span class="badge bg-primary-400 rounded-pill py-2 px-4" v-else
+                          >已付款</span
+                        > -->
+                      <span v-else>已付款</span>
                     </td>
                   </tr>
                 </tbody>
               </table>
               <button
+                v-if="!order.is_paid"
                 type="submit"
-                class="btn btn-primary-200 w-100 text-white py-3"
+                class="btn btn-primary-200 rounded-pill w-100 text-white py-3"
                 :class="{ disabled: order.is_paid }"
               >
                 確認付款
@@ -119,6 +138,7 @@
 </template>
 <script>
 import Swal from 'sweetalert2'
+import { RouterLink } from 'vue-router'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export default {
   data() {
@@ -126,6 +146,9 @@ export default {
       order: {},
       fullPage: true
     }
+  },
+  components: {
+    RouterLink
   },
   methods: {
     getOrder() {
@@ -167,3 +190,8 @@ export default {
   }
 }
 </script>
+<style>
+.btn:hover {
+  color: white;
+}
+</style>

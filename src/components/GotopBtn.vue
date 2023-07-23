@@ -1,9 +1,9 @@
 <template>
   <button
-    class="float-button btn rounded-circle border border-2 d-flex justify-content-center align-items-center"
+    class="float-button btn rounded-circle border border-secondary border-2 d-flex justify-content-center align-items-center"
     @click="scrollToTop"
   >
-    <span class="material-symbols-outlined fs-9"> expand_less </span>
+    <span class="material-symbols-outlined fs-9 text-secondary"> expand_less </span>
   </button>
 </template>
 

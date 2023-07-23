@@ -1,10 +1,7 @@
 <template>
   <div class="wrapper">
     <header class="sticky-top">
-      <nav
-        class="navbar navbar-expand-lg navbar-dark fixed-navbar"
-        style="background-color: #71dacc"
-      >
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-navbar bg-primary-100">
         <div class="container position-relative">
           <a class="navbar-brand" href="#">
             <img
@@ -13,7 +10,9 @@
               class="d-inline-block align-text-top img-fluid"
               width="40"
             /> </a
-          ><a class="navbar-brand" href="#" style="font-family: Josefin Sans">EASY MATCH</a>
+          ><a class="navbar-brand text-white" href="#" style="font-family: Josefin Sans"
+            >EASY MATCH</a
+          >
           <div class="cartPosition d-lg-none">
             <RouterLink to="/cart" class="nav-link position-relative">
               <span class="material-symbols-outlined text-white"> shopping_cart </span>
@@ -40,20 +39,20 @@
               <li class="nav-item">
                 <RouterLink to="/" class="nav-link">首頁 </RouterLink>
               </li>
-              <li class="nav-item ms-lg-9">
+              <li class="nav-item ms-lg-4">
                 <RouterLink to="/products" class="nav-link">所有產品</RouterLink>
               </li>
-              <li class="nav-item ms-lg-9">
+              <li class="nav-item ms-lg-4">
                 <RouterLink to="/qa" class="nav-link">常見問題</RouterLink>
               </li>
-              <li class="nav-item ms-lg-9">
+              <li class="nav-item ms-lg-4">
                 <RouterLink to="/cart" class="nav-link position-relative d-lg-none">
                   購物車
                 </RouterLink>
               </li>
             </ul>
           </div>
-          <RouterLink to="/cart" class="nav-link cartPositionRight d-none d-lg-block">
+          <RouterLink to="/cart" class="nav-link cartPositionRight d-none d-lg-block pb-lg-0">
             <span class="material-symbols-outlined text-white"> shopping_cart </span>
             <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
@@ -64,12 +63,14 @@
         </div>
       </nav>
     </header>
-    <div class="min-vh-100 bg-tertiary-100">
+    <main class="min-vh-100 bg-tertiary-100">
       <RouterView />
-    </div>
-    <footer class="bg-primary-200 py-10 footer">
-      <h4 class="text-center fs-5 text-white fw-semibold">EASY MATCH</h4>
-      <p class="text-secondary text-center text-white">本網站僅供個人作品使用，不提供商業用途。</p>
+    </main>
+    <footer class="bg-primary py-4 footer">
+      <p class="text-center text-white mb-1">
+        本網站僅供個人作品使用，無任何商業用途 | <a href="#" class="text-white">登入後台</a>
+      </p>
+      <p class="text-center text-white fs-sm">Copyright © 2023 Easy match</p>
     </footer>
   </div>
 </template>
@@ -107,23 +108,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.wrapper {
-  min-height: calc(100% - 136px);
-}
-.fixed-navbar {
-  width: 100%;
-  position: absolute;
-  z-index: 999;
-}
-.cartPosition {
-  position: absolute;
-  right: 90px;
-  top: 15px;
-}
-.cartPositionRight {
-  position: relative;
-  top: 3px;
-}
-</style>

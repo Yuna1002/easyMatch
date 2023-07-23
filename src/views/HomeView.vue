@@ -1,6 +1,7 @@
 <template>
   <SuccessToast />
-  <div
+  <!-- banner -->
+  <section
     class="banner d-flex justify-content-center align-items-center position-relative overflow-hidden"
   >
     <div class="d-flex flex-column flex-md-row justify-content-md-center align-items-md-center">
@@ -18,7 +19,7 @@
           EASY<br />MATCH
         </h1>
         <p
-          class="fs-lg-7 fs-5 text-white text-nowrap mb-10 mb-md-16"
+          class="text-white fs-lg-7 fs-5 text-nowrap mb-10 mb-md-16"
           style="font-family: Noto Sans TC"
           data-aos="fade-right"
         >
@@ -26,7 +27,7 @@
         </p>
         <RouterLink
           to="/products"
-          class="btn btn-white text-primary-200 rounded-pill py-6 px-8 fw-semibold btn-hover d-flex align-items-center"
+          class="btn btn-white text-primary-200 rounded-pill py-6 px-8 fw-bold btn-hover d-flex align-items-center"
           @mouseenter="hover = true"
           @mouseleave="hover = false"
           ><span class="material-symbols-outlined me-2 fw-bold" v-if="hover === true">
@@ -42,14 +43,16 @@
       <!-- 手機版的藥丸 -->
       <img class="d-md-none mobile-element" src="../assets/images/RIght_pill.svg" alt="藥丸圖片" />
     </div>
-  </div>
+  </section>
+  <!-- easy match的優點 -->
   <section class="bg-tertiary-100">
     <div class="container pt-30 pb-40">
-      <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-6" data-aos="fade-right">
-        選擇Easy match的優點
+      <h2 class="text-center fs-md-8 fs-6 fw-bold mb-6" data-aos="fade-right">
+        <span style="font-family: Josefin Sans">Easy match</span> 的優點
       </h2>
+
       <p class="text-center fs-lg-6 fs-16 mb-20">
-        您是否保健食品瓶瓶罐罐一大堆？是否懶得再分裝藥盒？是否對於哪個時段吃有疑問？
+        保健食品瓶瓶罐罐一大堆？分裝藥盒嫌麻煩？哪個時段吃有疑問？
       </p>
       <div class="row justify-content-center">
         <div class="col-10 col-xl-3 col-md-6 mb-15">
@@ -86,7 +89,7 @@
   <!-- 30天份 EASY MATCH -->
   <section class="bg-3">
     <div class="container pt-30 pb-40">
-      <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-20" data-aos="fade-right">
+      <h2 class="text-center fs-md-8 fs-6 fw-bold mb-20" data-aos="fade-right">
         30天份 EASY MATCH
       </h2>
       <div class="row justify-content-center">
@@ -178,7 +181,7 @@
   <!-- 熱門產品 swiper -->
   <section class="bg-tertiary-100">
     <div class="container pt-30 pb-40">
-      <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-5" data-aos="fade-right">熱門產品</h2>
+      <h2 class="text-center fs-md-8 fs-6 fw-bold mb-5" data-aos="fade-right">熱門產品</h2>
       <div class="row justify-content-center">
         <div class="col-10 col-sm-12">
           <HotProductsSwiper />
@@ -191,21 +194,21 @@
     <div class="container pt-20">
       <div class="row">
         <div class="col-md-6">
-          <div class="ms-4">
-            <h2 class="fs-lg-9 fs-md-7 mb-6 fw-bold" data-aos="fade-right">專業線上諮詢</h2>
+          <div class="ms-4 d-flex flex-column align-items-start">
+            <h2 class="fs-lg-8 fs-md-7 mb-6 fw-bold" data-aos="fade-right">專業線上諮詢</h2>
             <p class="fs-lg-6 mb-10" data-aos="fade-up">
               線上真人專家諮詢，為您的客製化需求，提供良好的建議
             </p>
-            <button
-              type="button"
-              class="btn btn-white text-primary-200 rounded-pill py-6 px-8 fs-lg-5 fw-semibold mb-md-25 btn-hover d-flex align-items-center"
+            <RouterLink
+              class="btn btn-white text-primary-200 rounded-pill py-6 px-8 fw-bold mb-md-25 btn-hover d-flex align-items-center"
               @mouseenter="hover = true"
               @mouseleave="hover = false"
+              to="qa"
             >
               <span class="material-symbols-outlined me-2 fw-bold" v-if="hover === true">
                 arrow_forward </span
               >前往諮詢
-            </button>
+            </RouterLink>
           </div>
         </div>
         <div class="col-md-6 d-flex align-items-md-end">
@@ -214,10 +217,10 @@
       </div>
     </div>
   </section>
-  <!-- 好評回饋 -->
+  <!-- 好評回饋 swiper-->
   <section class="bg-tertiary-100 pt-30 pb-40">
     <div class="container">
-      <h2 class="text-center fs-lg-9 fs-6 fw-bold mb-20 d-lg-none">好評回饋</h2>
+      <h2 class="text-center fs-md-8 fs-6 fw-bold mb-20 d-lg-none">好評回饋</h2>
       <div class="row flex-nowrap align-items-center">
         <div class="col-lg-3 d-none d-lg-block">
           <div class="card bg-primary border-0 rounded-4 d-none d-lg-block py-30 px-6">

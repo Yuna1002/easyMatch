@@ -92,7 +92,7 @@
                     </div>
                     <button
                       type="button"
-                      class="btn btn-secondary text-white disabled"
+                      class="btn btn-secondary text-white disabled rounded-pill py-2"
                       v-if="cart.carts?.some((item) => item.product_id === product.id)"
                     >
                       已加入
@@ -100,7 +100,7 @@
                     <button
                       type="button"
                       v-else
-                      class="btn btn-primary-200 text-white"
+                      class="btn btn-primary-200 text-white rounded-pill btn-hover py-2"
                       :disabled="loadingItem === product.id"
                     >
                       <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i
