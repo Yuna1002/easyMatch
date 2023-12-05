@@ -1,86 +1,46 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import Swal from 'sweetalert2'
+import Toast from '../mixins/toast'
 const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
 export const cartStore = defineStore('cart', {
   state: () => {
     return {
-      cart: { group: 1 }, 
+      cart: {},
       cartNum: 0,
-      openToast:false,
-      loadingItem: ""
+      loadingItem: ''
     }
   },
   actions: {
-    getCart() {
-      axios
-        .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`)
-        .then((res) => {
-          this.cart = res.data.data
-          this.cart.group=1
-          this.checkCart()
-          // 在頁面載入時讀取 localStorage 中的值，如果有的話
-          const savedOption = localStorage.getItem('selectedGroup')
-          if (savedOption) {
-            this.cart.group = parseInt(savedOption)
-           }
-          this.calcCartNum()
-          this.openToast=false
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
-    calcCartNum() {
-      this.cartNum = this.cart.carts.length
-    },
-    addToCart(product_id, qty = 30) {
-      this.loadingItem = product_id;
-      const data = {
-        product_id,
-        qty
+    async getCart() {
+      try {
+        const res = await axios.get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`)
+        this.cart = res.data.data
+        //如果localStorage有值，賦值給cart.group，如果為空或不存在 則賦值1
+        this.cart.group = JSON.parse(localStorage.getItem('group')) || 1
+      } catch (err) {
+        console.log(err)
       }
-      axios
-        .post(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart`, { data })
-        .then((res) => {
-          if (res.data.success===true) {
-            this.openToast=true
-          }
-          this.getCart()
-          
-        })
-        .catch((err) => {
-          console.log(err)
-        })
     },
-    delCart(id) {
-      this.loadingItem = id;
-      axios
-        .delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${id}`)
-        .then((res) => {
-          Swal.fire({
-            icon: 'success',
-            toast: true,
-            position: 'top',
-            showConfirmButton: false,
-            title:res.data.message,
-            timer: 1500,
-          });
-          this.getCart()
+    async delCart(id) {
+      this.loadingItem = id
+      try {
+        const res = await axios.delete(`${VITE_APP_URL}/api/${VITE_APP_PATH}/cart/${id}`)
+        Toast.fire({
+          icon: 'success',
+          title: res.data.message
         })
-        .catch((err) => {
-          alert(err.data.message)
-        })
-    },
-    saveToLocal(){
-        localStorage.setItem('selectedGroup', this.cart.group)
-
-    },
-    checkCart(){
-      if(this.cart.carts.length===0){
-        localStorage.setItem('selectedGroup',1)
+        this.getCart()
+      } catch (err) {
+        console.log(err)
       }
     }
   },
-  getters: {}
+  getters: {
+    calcCartNum(state) {
+      return (state.cartNum = this.cart.carts?.length)
+    },
+    finalTotal(state) {
+      return state.cart.total * state.cart.group
+    }
+  }
 })

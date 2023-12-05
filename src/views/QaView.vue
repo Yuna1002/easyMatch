@@ -1,6 +1,6 @@
 <template>
   <div class="pt-30 pb-20">
-    <h1 class="h2 text-center mb-8">常見問題</h1>
+    <h1 class="h2 text-center mb-10">常見問題</h1>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-10">

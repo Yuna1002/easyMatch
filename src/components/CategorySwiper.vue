@@ -115,11 +115,6 @@ export default {
     this.getProductsAll()
   }
 }
-
-// :autoplay="{
-//       delay: 2500,
-//       disableOnInteraction: true
-//     }"
 </script>
 <style>
 .swiper-pagination-bullet {

@@ -19,7 +19,7 @@
               <span
                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
               >
-                {{ cartNum }}
+                {{ calcCartNum }}
               </span>
             </RouterLink>
           </div>
@@ -57,7 +57,7 @@
             <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger rounded-circle"
             >
-              {{ cartNum }}
+              {{ calcCartNum }}
             </span>
           </RouterLink>
         </div>
@@ -88,7 +88,8 @@ export default {
     RouterLink
   },
   computed: {
-    ...mapState(cartStore, ['cartNum'])
+    // ...mapState(cartStore, ['cartNum'])
+    ...mapState(cartStore, ['calcCartNum'])
   },
   methods: {
     ...mapActions(cartStore, ['getCart']),

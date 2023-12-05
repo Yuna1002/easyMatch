@@ -1,129 +1,76 @@
 <template>
   <div class="bg-tertiary-100 pt-20 pt-md-22">
-    <SuccessToast />
     <div class="container pt-lg-0 pb-40">
       <div class="row">
         <!-- 麵包屑 -->
-        <nav aria-label="breadcrumb" class="bg-tertiary-100 mb-9">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item">
-              <RouterLink to="/" class="text-primary-200">首頁</RouterLink>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">所有產品</li>
-          </ol>
-        </nav>
-
+        <BreadCrumb></BreadCrumb>
         <!-- 側邊欄sidebar -->
         <div class="col-md-3 sidebar-position">
-          <div
-            class="list-group d-flex justify-content-center flex-row flex-md-column bg-tertiary-100 rounded-0 sidebar-position overflow-auto"
-          >
-            <h2 class="fs-4 ps-md-8 mb-6">
-              <a
-                href=""
-                class="list-group-item sidebar-link text-nowrap"
-                @click.prevent="filterProduct('全部')"
-                :class="{ 'sidebar-link-active': active === '全部' }"
-              >
-                全部產品
-              </a>
-            </h2>
-            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
-              <a
-                href=""
-                class="list-group-item sidebar-link text-nowrap"
-                @click.prevent="filterProduct('維生素')"
-                :class="{ 'sidebar-link-active': active === '維生素' }"
-              >
-                維生素
-              </a>
-            </h2>
-            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
-              <a
-                href=""
-                class="list-group-item sidebar-link text-nowrap"
-                @click.prevent="filterProduct('礦物質')"
-                :class="{ 'sidebar-link-active': active === '礦物質' }"
-              >
-                礦物質
-              </a>
-            </h2>
-            <h2 class="fs-4 ps-md-3 ps-md-8 mb-6">
-              <a
-                href=""
-                class="list-group-item sidebar-link text-nowrap"
-                @click.prevent="filterProduct('功能性補給')"
-                :class="{ 'sidebar-link-active': active === '功能性補給' }"
-              >
-                功能性補給
-              </a>
-            </h2>
-          </div>
+          <CategorySidebar></CategorySidebar>
         </div>
         <!-- 產品列表 -->
         <div class="col-md-9 vl-parent" ref="productsContainer">
-          <div class="d-flex flex-column align-items-center">
-            <div class="row justify-content-center justify-content-lg-start mb-20">
-              <div
-                class="col-10 col-sm-12 col-xl-4 col-lg-6 mb-6"
-                v-for="product in filterProducts"
-                :key="product.id"
+          <div class="row justify-content-center justify-content-md-start mb-20">
+            <div
+              class="col-10 col-sm-12 col-md-6 col-lg-4 mb-6"
+              v-for="product in filterProducts"
+              :key="product.id"
+            >
+              <a
+                href=""
+                class="card bg-card-bg border-0 h-100 pb-5 products-card"
+                @click.prevent="handleClick($event, product.id)"
               >
-                <a
-                  href=""
-                  class="card bg-card-bg border-0 h-100 pb-5 products-card"
-                  @click.prevent="handleClick($event, product.id)"
-                >
-                  <div
-                    style="height: 180px; background-size: cover; background-position: center"
-                    :style="{ backgroundImage: `url(${product.imageUrl})` }"
-                    class="mb-2"
-                  ></div>
-                  <div class="card-body px-8 d-flex flex-column">
-                    <div class="d-flex mb-4">
-                      <h3 class="card-title h5 fw-bold mb-0">
-                        {{ product.title }}
-                      </h3>
-                      <div>
-                        <span class="badge bg-primary rounded-pill fs-3 fw-normal ms-2">{{
-                          product.category
-                        }}</span>
-                      </div>
+                <div
+                  style="height: 180px; background-size: cover; background-position: center"
+                  :style="{ backgroundImage: `url(${product.imageUrl})` }"
+                  class="mb-2"
+                ></div>
+                <div class="card-body px-8 px-md-4 d-flex flex-column">
+                  <div class="d-flex mb-4">
+                    <h3 class="card-title h5 fw-bold mb-0">
+                      {{ product.title }}
+                    </h3>
+                    <div>
+                      <span class="badge bg-primary rounded-pill fs-3 fw-normal ms-2">{{
+                        product.category
+                      }}</span>
                     </div>
-
-                    <p class="card-text mb-4 h-100">
-                      {{ product.simple }}
-                    </p>
-
-                    <div class="d-flex align-items-center justify-content-end mb-1">
-                      <p class="fw-semibold text-primary-200">
-                        {{ `NT$${product.price} /${product.unit}` }}
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      class="btn btn-secondary text-white disabled rounded-pill py-2"
-                      v-if="cart.carts?.some((item) => item.product_id === product.id)"
-                    >
-                      已加入
-                    </button>
-                    <button
-                      type="button"
-                      v-else
-                      class="btn btn-primary-200 text-white rounded-pill btn-hover py-2"
-                      :disabled="loadingItem === product.id"
-                    >
-                      <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i
-                      >加入購物車
-                    </button>
                   </div>
-                </a>
-              </div>
+
+                  <p class="card-text mb-4 h-100">
+                    {{ product.simple }}
+                  </p>
+
+                  <div class="d-flex align-items-center justify-content-end mb-1">
+                    <p class="fw-semibold text-primary-200">
+                      {{ `NT$${product.price} /${product.unit}` }}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    class="btn btn-secondary text-white disabled rounded-pill py-2"
+                    v-if="cart.carts?.some((item) => item.product_id === product.id)"
+                  >
+                    已加入
+                  </button>
+                  <button
+                    type="button"
+                    v-else
+                    class="btn btn-primary-200 text-white rounded-pill btn-hover py-2"
+                    :disabled="loadingItem === product.id"
+                  >
+                    <i class="fas fa-spinner fa-pulse" v-if="product.id === loadingItem"></i
+                    >加入購物車
+                  </button>
+                </div>
+              </a>
             </div>
+          </div>
+          <div>
             <PaginationComponent
-              v-if="active === '全部'"
-              :pages="pages"
-              @get-products="getProducts"
+              v-if="category === '全部'"
+              class="d-flex justify-content-center"
             ></PaginationComponent>
           </div>
         </div>
@@ -134,60 +81,18 @@
 
 <script>
 import { mapState, mapActions } from 'pinia'
-import { cartStore } from '../stores/cartStore'
 import { productsStore } from '../stores/productsStore'
-import { scrollStore } from '../stores/scrollStore'
-import SuccessToast from '../components/SuccessToast.vue'
+import { cartStore } from '../stores/cartStore'
+import CategorySidebar from '@/components/CategorySidebar.vue'
 import PaginationComponent from '../components/PaginationComponent.vue'
-const { VITE_APP_URL, VITE_APP_PATH } = import.meta.env
+import BreadCrumb from '../components/BreadCrumb.vue'
 export default {
-  data() {
-    return {
-      products: [],
-      filterProducts: [],
-      tempProduct: {},
-      pages: {},
-      active: '全部',
-      fullPage: false
-    }
-  },
   components: {
-    SuccessToast,
-    PaginationComponent
+    PaginationComponent,
+    CategorySidebar,
+    BreadCrumb
   },
   methods: {
-    getProducts(page = 1) {
-      const loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.productsContainer
-      })
-      this.$http
-        .get(`${VITE_APP_URL}/api/${VITE_APP_PATH}/products/?page=${page}`)
-        .then((res) => {
-          this.products = res.data.products
-          this.pages = res.data.pagination
-          this.filterProducts = this.products
-          this.scrollToTop()
-          loader.hide()
-        })
-        .catch((err) => {
-          alert(err.data.message)
-        })
-    },
-    filterProduct(category) {
-      this.active = category
-      if (category === '全部') {
-        this.getProducts()
-        this.scrollToTop()
-        this.filterProducts = this.products
-      } else {
-        this.getProductsAll()
-        this.scrollToTop()
-        const allProducts = this.productsAll
-
-        const filter = allProducts.filter((product) => product.category === category)
-        this.filterProducts = filter
-      }
-    },
     handleClick(e, id) {
       if (e.target.nodeName === 'BUTTON') {
         this.addToCart(id)
@@ -195,19 +100,22 @@ export default {
         this.$router.push(`/product/${id}`)
       }
     },
-    ...mapActions(productsStore, ['getProductsAll']),
-    ...mapActions(cartStore, ['getCart']),
-    ...mapActions(cartStore, ['addToCart']),
-    ...mapActions(scrollStore, ['scrollToTop'])
+    ...mapActions(productsStore, ['getProductsAll', 'addToCart'])
   },
   computed: {
-    ...mapState(productsStore, ['productsAll']),
-    ...mapState(cartStore, ['cart']),
-    ...mapState(cartStore, ['loadingItem']),
-    ...mapState(scrollStore, ['scrollPosition'])
+    ...mapState(productsStore, ['filterProducts', 'category', 'loadingItem']),
+    ...mapState(cartStore, ['cart'])
+  },
+  created() {
+    this.getProductsAll()
   },
   mounted() {
-    this.getProducts()
+    const loader = this.$loading.show({
+      container: this.fullPage ? null : this.$refs.productsContainer
+    })
+    setTimeout(() => {
+      loader.hide()
+    }, 800)
   }
 }
 </script>

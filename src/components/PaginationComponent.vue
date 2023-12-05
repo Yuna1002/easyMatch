@@ -6,7 +6,7 @@
           class="page-link"
           href="#"
           aria-label="Previous"
-          @click.prevent="$emit('getProducts', pages.current_page - 1)"
+          @click.prevent="getProducts(pages.current_page - 1)"
         >
           <span aria-hidden="true">&laquo;</span>
         </a>
@@ -18,9 +18,7 @@
         :class="{ active: page === pages.current_page }"
       >
         <span class="page-link" v-if="page === pages.current_page">{{ page }}</span>
-        <a v-else class="page-link" href="#" @click.prevent="$emit('getProducts', page)">{{
-          page
-        }}</a>
+        <a v-else class="page-link" href="#" @click.prevent="getProducts(page)">{{ page }}</a>
       </li>
 
       <li class="page-item" :class="{ disabled: !pages.has_next }">
@@ -28,7 +26,7 @@
           class="page-link"
           href="#"
           aria-label="Next"
-          @click.prevent="$emit('getProducts', pages.current_page + 1)"
+          @click.prevent="getProducts(pages.current_page + 1)"
         >
           <span aria-hidden="true">&raquo;</span>
         </a>
@@ -37,8 +35,14 @@
   </nav>
 </template>
 <script>
+import { mapState, mapActions } from 'pinia'
+import { productsStore } from '../stores/productsStore'
 export default {
-  props: ['pages'],
-  emits: ['getProducts']
+  methods: {
+    ...mapActions(productsStore, ['getProducts'])
+  },
+  computed: {
+    ...mapState(productsStore, ['pages'])
+  }
 }
 </script>
