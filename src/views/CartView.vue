@@ -99,11 +99,7 @@
           </tfoot>
         </table>
         <div v-if="cart.carts?.length > 0" class="d-flex justify-content-end">
-          <RouterLink
-            to="/order"
-            type="button"
-            class="btn btn-primary text-white rounded-0 d-flex py-3 px-5"
-          >
+          <RouterLink to="/order" class="btn btn-primary text-white rounded-0 d-flex py-3 px-5">
             前往結帳<span class="material-symbols-outlined fw-semibold"> chevron_right </span>
           </RouterLink>
         </div>
